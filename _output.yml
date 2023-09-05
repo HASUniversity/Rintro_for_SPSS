@@ -1,0 +1,20 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: section
+  fig_caption: TRUE
+  number_sections: TRUE
+  Sharing: none
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><a href="./">Inleiding R</a></li>
+      after: |
+        <li><a href="https://www.has.nl" target="blank">HAS green academy</a></li>
+  sharing: null
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  citation_package: natbib
+bookdown::epub_book:
+  stylesheet: style.css

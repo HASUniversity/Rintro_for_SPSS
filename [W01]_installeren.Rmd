@@ -1,0 +1,331 @@
+# Start with RStudio
+
+RStudio is free software and available for Windows, macOS and Linux.
+
+R is a computer language, developed in New Zealand, in 1995, maintained by the R Core Team.
+In make life easier an an **Integrated Development Environment** (*IDE*) is developed: RStudio.
+With the combination of R and RStudio you can easily handle data, make analyses and create figures.
+
+
+## Installing
+
+You need to install both R and RStudio.
+You can find the links [here](https://posit.co/download/rstudio-desktop/){target="_blank"} vinden.
+
+```{exercise, install}
+Install the software
+
+* Click on the link above
+* Follow the first step to install R. Click on *install for the first time*. Always choose *yes* and *OK*.
+* Go back to the first website and follow step 2. Choose the most recent free stand alone version of RStudio.
+* Open RStudio
+
+```
+
+
+## Console
+
+When you have opened RStudio, you see at the left bottom the **console**.
+This is the place where you give the computer R commands.
+The term originates from the time that computers were the size of a (modern) fridge, and giving commands via a separate keyboard and screen (often incorporated in a desk): the console.
+Nowadays everything is integrated in a laptop, and the commands are often hidden behind icons.
+
+Excpet when you start working with R ....
+
+At the bottem you see `>`.
+That is the *prompt*, right after you can type commands.
+
+Most of you are not familiar with communicating with computers via language, so it is important to practice it a bit.
+
+
+```{exercise, rekenopdrachten}
+Calculation excercise
+
+* Give R some calculation commands, e.g. `4*2`. Don't put a = for or after the command. End your command with *enter*.
+* try also square roots (`sqrt()`), the power (`^`), pi (`pi()`).
+
+```
+
+ 
+## Objects
+
+Often you want to use the outcome of a calculation in the next step.
+You can put the outcome in the computer memory by giving it a name:
+
+```{r, eval=FALSE}
+outcome <- 4*2
+```
+
+of
+
+```{r, eval=FALSE}
+4*2 -> outcome
+```
+
+The arrow (`<-`) means that the name (the *object*) where it points to, get the value which is at the other end of the arrow.
+
+Most often the left pointing arrow is used (`<-`), which you can write instantly with surrounding spaces with the short-cut `alt-`.
+Objects always need to start with a letter and should not contain any spaces.
+
+By just writing the object name in the console you can call the value of that object.
+And good to know that R distuinguished normal and capital letters.
+
+Tip: use object names that make sense,  you will recognize the purpose the day after.
+
+
+```{exercise, objecten}
+Objects
+
+* make objects for your name, place of residence, age and favorite number. NB:you need to start and end a text string with `"` to make clear it is a valua and not an object name. For numbers, don't use `"`! 
+* call one-by-one the different objects
+* let R sum up your age and favorite number (Nb: use the object names!)
+* Try also sum up name and place of residence. You will get an error. Read it carefully and try to understand the meaning of the error
+
+```
+
+
+## Vectors {#Vectors}
+
+Objects can be combined in a *vector*, with the function `c()`(c stands for *combine*).
+
+```{r, eval=FALSE}
+p1 <- c(naam, woonplaats, leeftijd)
+```
+
+The vector is an object on its own, containing multiple *values* from the other objects.
+In this case we have named this vector *p1*, but you can choose a different name if you like.
+Vectors are widely used in R, especially in statistical functions.
+
+You can call the values seperately by using an *index number* after the object name: e.g. `p1[2]`.
+Within the square brackets `[]` you give the item number in the vector.
+The first item has index number 1.
+
+You also can give multiple index numbers, using the function `c()`: e.g. `p1[c(1,3)]`, or using the minus sign to exclude one or more: e.g. `p1[-2]`.
+
+```{exercise, indexnummers}
+Index numbers
+
+* make a vectore with the range 1 to 10 (easily made in R with the code `1:10`). Give it an object name.
+* Practice with calling different numbers from the range using index numbers.
+* Call the complete vector, except the last value.
+* Find a clever way to call at once index numbers 3-7.
+
+```
+
+
+If vectors only contain numbers, you can make calculations with the complete vector.
+
+```{exercise, vectoren}
+Vectors
+
+
+* Create a vector with the rang 1-4
+* Multiple the vector by 2. What happens?
+* Try also different calculations.
+* What happens if you multiply the vector by itself?
+  
+```
+  
+
+## Functies
+
+Functions are the foundation of R (and every other computer language).
+They are in essence small factories changing input to output.
+The output can be a number, but also a grpah or even the creation of a file.
+
+For illustration purposes the function `mean()`:
+
+```{r, eval=FALSE}
+mean(v)
+```
+
+Hiermee geef je R de opdracht het gemiddelde te berekenen van de getallen in vector v.
+
+```{exercise, functies}
+Functions
+
+* calculate the mean of the vector from last excercise.
+* Apply also the next functions:
+    * length()
+    * sd()
+    * min()
+    * max()
+    * range()
+    * summary()
+* Find out what these functions do. Tip: you can use `?functionname` to open a help page.
+
+```
+
+The input in a function is called an **argument**.
+Many functions can have multiple arguments. 
+Some of them are required, otherwise you get an error.
+Other arguments are not required, and have standard values.
+You only need to add them, if you want to have another values for those arguments.
+In the next lesson, about t-tests, you will find both types of arguments.
+
+NB: all arguments have names. It is a good custom to name them in your functions (e.g. `mean(x=p1)`), otherwise R will assume the order of arguments based on how the function is programmed.
+You find the argument named with the helper pages using `?`.
+
+
+## Packages {#packages}
+
+R has a great number of base functions available, but people have developed many more functions.
+These functions are available in so called *packages*. 
+Packages are  bundles of functions, often developed for specific purposes (e.g. making nice graphs).
+These packages are tested and available from a save location (CRAN-website).
+You can install them with the function `install.packages()`.
+As argument you give the package name. NB: it is text, so you need `"`.
+
+You only need to install it once on your computer.
+It is like buying a book (but then for free!) and store it in your bookshelf.
+
+For this course we use many functions out of a collection of packages called **tidyverser**.
+We also use the package **readxl** to import Excel files.
+
+```{exercise, packages}
+Install packages
+
+* Install the packages tidyverse and readxl. NB: installing tidyverse takes time, wait until you see the cursor again.
+
+```
+
+Placing a book in the bookshelf, does not mean you can read it.
+In order to use a function from a package you need to activate with the function `library()`.
+The reason is that some packages contain functions with the same name. 
+It is saver to only activate packages you need.
+
+
+
+## R-project
+
+The power of RStudio is the way you can organise data analysis in projects.
+By linking a project environment to a map on your computer, you can store the history of your data analysis for that specific map and RStudio use that map as the default to search and store files (replacing the old R-code `setwd()` to define the working directory).
+You can start a project in an existing folder, or make a new map (RStudio uses the old name directory for a map).
+
+For this course, I already created a map in Teams which you need to synchronise with your computer in order to work with.
+
+You can open the project from within RStudio: **File** -> **Open project**, or next time by double clicking on the R-project file in your map. 
+Then it will automatically open RStudio in your project mode.
+
+
+## Script {#script}
+
+Nice that you can communicate with the computer via de console, but how do you remember what you did last week?
+The solution is to write your codes in a text document and execute the codes from there.
+Such a text document is called a **script**.
+If you save your script in your project map, you only need to open it to see what you did last time.
+
+You can open a new script by either clicking on the plus sign in the menu, or use the short-cut **ctr**+**shift**+**n**. 
+
+```{exercise, script}
+Setup script
+
+* type in the first row the next code `library(readxl)`.
+* in th next row type `temp <- read_excel("data/lichaamstemperatuur.xlsx")
+* Save the script as *Bodytemp.R* in je R-folder.
+
+```
+
+With the short-cut **Ctrl**+**Enter** you can run the row where your cursor is. 
+It automatically goes to the next row, so you can by repeatly using the short-cut run all codes in your script.
+You can also select all or part of the code and run it at once with the same short-cut.
+
+
+```{exercise, code}
+Run code
+
+* execute the codes from your script row by row
+* Observe what it is doing
+
+```
+
+To make your codes more clear, you can add comments.
+Text starting with # will be recognized as comments, and not executed.
+It is a good habit to add comments in your scripts, so other people can understand what you were doing.
+
+
+```{exercise, comments}
+Comments
+
+* Include above both rows of code in the scrip an extra row describing the code below as a comment
+
+```
+
+
+## Data frame
+
+
+By running both rows of code, if correct you see on the right top side the object bodytemp.
+The object is the data from the Excel file, and is called a **data frame**.
+
+```{exercise, dataframe}
+Data frame
+
+* add the next code to your script: `str(bodetemp)`, and run that code. 
+```
+
+*Str* stands for structure and with this function you can see the  intern structure of the objec
+
+You get the following output:
+
+```{R echo=FALSE, warning = FALSE, message = FALSE}
+library(readxl)
+bodytemp <- read_excel("../data/lichaamstemperatuur.xlsx")
+str(bodytemp)
+```
+
+The top row shows the type of object.
+In this case it has three labels: *tbl_df*, *tbl* en *data.frame*.
+Sounds complicated, but all three say that it is a ** data frame**.
+
+Every column is in fact a vector.
+They are listed after the **$**.
+The type of data in each vector is given (**num** = numeric, **chr** = character (= text)).
+Between the brackets ([]) you can find how long the vectors are.
+
+There are several ways to look at your data frame:
+
+* Via the object name (`bodytemp`)
+* With the function `View()`
+* In the right top window, by clicking on the object name
+
+```{exercise, oproepen}
+View your Data frame
+
+* Try the three ways to view your data frame
+
+```
+
+Often, you only need certain vectors (columns) from your data frame.
+You can call these vectors seperately by using the sign **$** after the object name of the data frame. 
+In case of the bodytemp data set: `bodytemp$tc` will show you the vector tc.
+
+
+```{exercise, vectoruitdataframe}
+call vector from data frame
+
+* Write a code that will calculate the average of the vector tc.
+
+```
+
+```{exercise, eigendataset}
+Own data set
+
+* Use, or make an Excel file of a own data set (e.g. from your internship)
+* Start a new script and write code that will import that data
+* View your data in RStudio
+
+```
+
+
+
+## Summary part 1
+
+You now have the basic skills of working in RStudio.
+
+* You can use R commands to make calculations
+* You can work with RSTudio projects and scripts
+* You know what data frames and vectors are, and make calculations with them
+* You can import data from Excel files
+
+In the next chapter you use these skills to apply statistics.
