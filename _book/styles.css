@@ -1,0 +1,44 @@
+/* css styles */
+
+.quarto-title-banner {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #1cd354;
+}
+
+#title-block-header.quarto-title-block.default .description, #title-block-header.quarto-title-block.default .abstract {
+  margin-top: 0;
+  font-size: 0;
+}
+
+.navbar-brand {
+  position: relative;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  padding-left: 2em;
+  font-size: 2.5rem;
+  background: url(images/boekenkast.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-brand {
+  color: #fff;
+}
+
+.fixed-top {
+  color: #fff;
+  border-bottom-color: #1cd354;
+  border-bottom-width: 0.5em;
+  border-bottom-style: solid;
+}
+
+h1, .h1, h2, .h2 {
+  margin-top: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+figcaption {
+  color: #747a7f;
+  font-style: italic;
+}

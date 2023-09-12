@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to R for students specialisations - 4&nbsp; Lineair models 1: Linear Regressie</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./W05.html" rel="next">
+<link href="./W03.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to R for students specialisations</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Setup</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W01.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W02.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W03.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W04.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W05.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear models 2: ANOVA’s and Posthoc Tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W06.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link active" data-scroll-target="#hypothesis-testing"> <span class="header-section-number">4.1</span> Hypothesis testing</a></li>
+  <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions"> <span class="header-section-number">4.2</span> Predictions</a></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"> <span class="header-section-number">4.3</span> practice</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>R has a function to fit the best linear model in a dataset. Most statistical tests (linear regression, one-way ANOVA, two-way ANOVA) are based on this linear model. The most intuitive linear model is a straight line through a cloud of data points. That is what you are doing with a linear regression.</p>
+<p>The function to fit the linear model is <code>lm()</code>. Like the t.test it’s first argument is statistical formula: <code>response ~ explanatory</code>. In all cases the response vector needs to be numerical vector, otherwise you will get an error. In the case of a linear regression, the explanatory vector also needs to be an numerical vector.</p>
+<p>In you data map you’ll find a file called ijklijn.xlsx. It is (not the best) calibration line for a colorimetric measurements: starch concentration:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Calibration line</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">absorptie</th>
+<th style="text-align: right;">concentratie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">0.125</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.060</td>
+<td style="text-align: right;">0.250</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.176</td>
+<td style="text-align: right;">0.500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.249</td>
+<td style="text-align: right;">0.750</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.285</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>To avoid complications with further functions (like <code>predict()</code>), we use an extra argument <code>data</code> to refer to the data frame object and we only use the column names (without <code>object$</code>) in the statistical model.</p>
+<div id="exr-calibration" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.1 </strong></span>Calibration line</p>
+<p>Make script that runs:</p>
+<ul>
+<li>importing the data set</li>
+<li>fit the best model: NB: store the output as an object using &lt;-</li>
+<li>look at the output and try to understand the different numbers.</li>
+<li>also run <code>summary()</code> with as argument the lm-object.</li>
+</ul>
+</div>
+<p>Did you find the R<sup>2</sup>? For more details about the output of the <code>summary()</code> function: <a href="https://stats.stackexchange.com/questions/5135/interpretation-of-rs-lm-output" target="_blank">see here</a></p>
+<section id="hypothesis-testing" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.1</span> Hypothesis testing</h2>
+<p>Although it is not quite common to use regression analysis to test a hypothesis in this case: is there a relation between absorption and concentration), it is possible.</p>
+<p>With the function <code>anova()</code> you apply an <strong>analysis of variance</strong>. In short, it will test if the explanatory power of the variation in your data set by the statistical model is so good, that you can rule out the possibility that this is due to random effects.</p>
+<p>The function <code>anova()</code> needs as argument the output of the function <code>lm()</code> (that’s why you needed to store the output van lm as an object).</p>
+<p>The function <code>anova()</code> creates an ANOVA table with for the explanory variable the p-value (here called <strong>Pr(&gt;F)</strong>).</p>
+<div id="exr-hypotest" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.2 </strong></span>Hypothesis testing</p>
+<ul>
+<li>Apply the function <code>anova()</code> on the linear model of ijklijn</li>
+<li>Is there a significant relation between both vectors?</li>
+</ul>
+</div>
+</section>
+<section id="predictions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="predictions"><span class="header-section-number">4.2</span> Predictions</h2>
+<p>The most common use of regressions is to make predictions. In the case of a calibration line, you want to use it to estimate the concentration in unknown samples based on the absorption.</p>
+<p>You probably have done such measurements in the past by first estimate the regression line and use the parameters of that line to calculate the estimated concentrations.</p>
+<p>Luckily in R there is the function <code>predict()</code>. The negative side is that the function is a bit picky about the arguments. The first argument should be the output of the lm-function. So far so good. The next argument is the value(s) of the explanatory variable you want to make predictions for. Unluckily this argument should be in the format of a data frame ánd the column name should be exactly the same as in the statistical model.</p>
+<p>It is quite easy to make a data frame: <code>df &lt;- data.frame(absorptie = 1.5)</code></p>
+<p>Of course you can use a different object name than df. Instead of one number you can make a longer vector, e.g.&nbsp;<code>c(1.5, 2.3, 5.4)</code>.</p>
+<p>An interesting option is to calculate the confidence interval. Just add the argument <code>interval = "confidence"</code>).</p>
+</section>
+<section id="practice" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="practice"><span class="header-section-number">4.3</span> practice</h2>
+<p>In an experiment we want to test the assumption that the weight gain of sow’s are and indication of the birth weight van piglets. For 10 sow’s data is collected. You can find the data in zeugen.xlsx in your data map.</p>
+<div id="exr-piglets" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.3 </strong></span>Piglets</p>
+<ul>
+<li>Apply a linear regression.</li>
+<li>Check what the p-value and the R<sup>2</sup> are.</li>
+<li>Predict the expected piglet weight, and confidence interval, in the situation a sow will gain 15 kg</li>
+</ul>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./W03.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./W05.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear models 2: ANOVA’s and Posthoc Tests</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

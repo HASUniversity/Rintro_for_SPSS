@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to R for students specialisations - 2&nbsp; Figures via ggplot</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./W03.html" rel="next">
+<link href="./W01.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to R for students specialisations</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Setup</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W01.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W02.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W03.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W04.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W05.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear models 2: ANOVA’s and Posthoc Tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W06.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#first-steps" id="toc-first-steps" class="nav-link active" data-scroll-target="#first-steps"> <span class="header-section-number">2.1</span> First steps</a></li>
+  <li><a href="#code-for-figures" id="toc-code-for-figures" class="nav-link" data-scroll-target="#code-for-figures"> <span class="header-section-number">2.2</span> Code for figures</a></li>
+  <li><a href="#types-of-figures" id="toc-types-of-figures" class="nav-link" data-scroll-target="#types-of-figures"> <span class="header-section-number">2.3</span> Types of figures</a></li>
+  <li><a href="#aes" id="toc-aes" class="nav-link" data-scroll-target="#aes"> <span class="header-section-number">2.4</span> aes</a></li>
+  <li><a href="#position" id="toc-position" class="nav-link" data-scroll-target="#position"> <span class="header-section-number">2.5</span> position</a></li>
+  <li><a href="#transparancy" id="toc-transparancy" class="nav-link" data-scroll-target="#transparancy"> <span class="header-section-number">2.6</span> transparancy</a></li>
+  <li><a href="#densityplots" id="toc-densityplots" class="nav-link" data-scroll-target="#densityplots"> <span class="header-section-number">2.7</span> Densityplots</a></li>
+  <li><a href="#scatter-plots" id="toc-scatter-plots" class="nav-link" data-scroll-target="#scatter-plots"> <span class="header-section-number">2.8</span> Scatter plots</a></li>
+  <li><a href="#bar-chart" id="toc-bar-chart" class="nav-link" data-scroll-target="#bar-chart"> <span class="header-section-number">2.9</span> Bar chart</a></li>
+  <li><a href="#multiple-groups-with-bar-plots" id="toc-multiple-groups-with-bar-plots" class="nav-link" data-scroll-target="#multiple-groups-with-bar-plots"> <span class="header-section-number">2.10</span> multiple groups with bar plots</a></li>
+  <li><a href="#trend-line" id="toc-trend-line" class="nav-link" data-scroll-target="#trend-line"> <span class="header-section-number">2.11</span> Trend line</a></li>
+  <li><a href="#many-more-possibilities" id="toc-many-more-possibilities" class="nav-link" data-scroll-target="#many-more-possibilities"> <span class="header-section-number">2.12</span> Many more possibilities</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>The most common way to produce figures in R nowadays is using the package ggplot2. It is part of the Tidyverse packages. It is extremely versatile.</p>
+<p>In this course we spend one lesson on ggplot to learn the basics. We use the <a href="https://ggplot2-book.org/index.html" target="_blank">online manual</a>.</p>
+<div id="exr-ggplotmanual" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.1 </strong></span>Manual</p>
+<ul>
+<li>Read the <strong>first steps</strong> in the online manual</li>
+</ul>
+</div>
+<section id="first-steps" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="first-steps"><span class="header-section-number">2.1</span> First steps</h2>
+<p>GGplot is part of tidyverse, which includes all kind of tools to work with data, with some of them quite usefully when making figures. Therefore it is, in general, useful to make this tools available in your script.</p>
+<div id="exr-tidyverse" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.2 </strong></span>Tidyverse</p>
+<ul>
+<li>Add to your script a line of code that will activate tidyverse and run the code. NB: it is good custom to place all the library-function in the first rows of your script.</li>
+</ul>
+</div>
+</section>
+<section id="code-for-figures" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="code-for-figures"><span class="header-section-number">2.2</span> Code for figures</h2>
+<p>On first sight, codes for ggplot-figures look unnecessarily complicated, but it is in fact quite structured.</p>
+<p>The code works in a few steps:</p>
+<ul>
+<li>First step is to define the figure, by giving the variables for the x and y-axis.</li>
+</ul>
+<p><code>ggplot(data = df, aes(x = var1, y = var2)) +</code></p>
+<p>NB: replace the names var1, var2 and df for the names you use for your data frame and column names.</p>
+<p>The <code>+</code> is placed at the end of the row to indicate that the output of this row will be used in the next line of code. In this way, you can build-up the code for the figure in a clear and structured way.</p>
+<ul>
+<li>The second step is defining the type of figure, e.g.:</li>
+</ul>
+<p><code>geom_histogram()</code></p>
+<p>NB: for some figures you only need an x-variable, like for histogram or boxplot.</p>
+<p>::: {#exr-histogram}</p>
+<p>Histogram</p>
+<ul>
+<li>Add code in your script to make a histogram of body temperature</li>
+</ul>
+<p>:::`</p>
+</section>
+<section id="types-of-figures" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="types-of-figures"><span class="header-section-number">2.3</span> Types of figures</h2>
+<p>With ggplot there are many different types of figures possible. Have a look in the manual at the <a href="https://ggplot2-book.org/individual-geoms.html" target="blank">geoms chapter</a>.</p>
+<div id="exr-geomfunctions" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.3 </strong></span>geom-functions</p>
+<ul>
+<li>Find out which functions you need for a boxplot and for a scatterplot</li>
+</ul>
+</div>
+</section>
+<section id="aes" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="aes"><span class="header-section-number">2.4</span> aes</h2>
+<p>The functions <code>ggplot()</code>has <strong>aes</strong> as <strong>argument</strong> (input for the function). Aes stand for aesthetics. No idea why this word is chosen, since the argument is about which data is presented on which axis. You probably noticed that <code>aes</code> is followed by <code>()</code>, which indicates that aes is a function on its own.</p>
+<p>In <code>aes()</code> you can add additional arguments, e.g.&nbsp;to color or fill different groups (using <code>fill=vargroup</code> or <code>color=vargroup</code>, vargroup the name of column that defines the group).</p>
+<div id="exr-aes" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.4 </strong></span>aes</p>
+<ul>
+<li>adjust your script in a way that the different genders (column gen) have a different fill.</li>
+</ul>
+</div>
+</section>
+<section id="position" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="position"><span class="header-section-number">2.5</span> position</h2>
+<p>As you probably noticed, is the result of a histogram with two groups that both histograms are stacked. But it would give more insight if they are placed on the same level.</p>
+<p>You can change that with the argument <code>position</code> in the geom-function: <code>position =  "identity"</code>.</p>
+<p>The <strong>value</strong> identity means that both groups are positioned independently of each other on the y-axis. For other possibilities see <a href="https://ggplot2-book.org/layers.html?q=position#position" data-targeg="blank">manual</a>.</p>
+<div id="exr-position" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.5 </strong></span>position</p>
+<ul>
+<li>Adjust the code, so that both histograms are not stacked anymore.</li>
+</ul>
+</div>
+</section>
+<section id="transparancy" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="transparancy"><span class="header-section-number">2.6</span> transparancy</h2>
+<p>Now both histograms are at the same height can we compare the numbers more easily. Drawback is that in some places one group is hidden behind the other and you don’t see how much lower the other group is. The solution is to make the bars slightly transparant. You can do that with the argument (also in the geom-function) <code>alpha = 0.4</code>. The value 0.4 is oftern a good mix between brightness and transparency.</p>
+<div id="exr-alpha" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.6 </strong></span>alpha</p>
+<ul>
+<li>Add the argument alpha to your code and adjust the value to your preference.</li>
+</ul>
+</div>
+</section>
+<section id="densityplots" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="densityplots"><span class="header-section-number">2.7</span> Densityplots</h2>
+<p>A nice alternative for an histogram is a densityplot, via the function <code>geom_density</code>.</p>
+<div id="exr-density" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.7 </strong></span>density</p>
+<ul>
+<li>Copy the code for the histogram in your script.</li>
+<li>Replace the word histogram with density and run the code.</li>
+</ul>
+</div>
+<p>Quite simple, isn’t it?</p>
+</section>
+<section id="scatter-plots" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="scatter-plots"><span class="header-section-number">2.8</span> Scatter plots</h2>
+<p>A common graph is the scatter plot. Both x- and y-axis contain numerical (and often continuous) data.</p>
+<p>In the <code>aes()</code> you need column names for both x and y. With <code>geom_point</code> you display the data as points in the graph. As in the histogram, you can give groups different colours, in the case of points, choose the argument <code>color</code> instead of <code>fill</code> in <code>aes()</code>.</p>
+<div id="exr-scatterplot" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.8 </strong></span>Scatterplot</p>
+<ul>
+<li>Add in your script code for a scatterplot of tc on the x-axis verus hr (heart rate)</li>
+<li>Give the different genders a different colour.</li>
+</ul>
+</div>
+</section>
+<section id="bar-chart" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="bar-chart"><span class="header-section-number">2.9</span> Bar chart</h2>
+<p>A common way to present data like in the body temperature data set, is to use bar charts.</p>
+<p>Bar charts give the average (and ofter spread in the form of error bars) of the data, which is nearly always divided in different groups (one bar for each group).</p>
+<p>The most convinient ggplot-code for this kind of plots is <code>stat-summary()</code>. In the function you can define the type of graph. For a bar chart, use <code>geom = "bar"</code>. It automatically calculates the mean and the standard error for each group.</p>
+<div id="exr-barchart" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.9 </strong></span>Bar chart</p>
+<ul>
+<li>make in the same script new code to show the means of body temperature of men and women in separate bars. Tip: use <code>gen</code> as variable on the x-axis</li>
+<li>run the code</li>
+</ul>
+</div>
+<p>Often you want to include error bars in your bar chart. With the ggplot it is quite easy: just add another layer with <code>stat_summary()</code>, but now with <code>geom = "errorbar"</code>. For aesthetic reasons make the error bar smaller than the bar by adding the argument <code>width = 0.5</code>.</p>
+<div id="exr-errorbars" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.10 </strong></span>Error bar</p>
+<ul>
+<li>Add an error bar to your plot</li>
+</ul>
+</div>
+</section>
+<section id="multiple-groups-with-bar-plots" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="multiple-groups-with-bar-plots"><span class="header-section-number">2.10</span> multiple groups with bar plots</h2>
+<p>Also by bar charts you can show different groups. In this case use the argument <code>fill</code> as you want to fill up the bars.</p>
+<p>The default setting for position in <code>stat_summary()</code> is “identity:, but with bar charts it is normal to have the groups besides each other, that is called dodge. You can control how close the groups are by: <code>position = position_dodge(0.9)</code>. A value of 0.9 is often optimal.</p>
+<p>NB: <code>position_dodge()</code> also works with other types of graphs like box plots and violin plots.</p>
+</section>
+<section id="trend-line" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="trend-line"><span class="header-section-number">2.11</span> Trend line</h2>
+<p>When you have a scatter plot, you are often interested in the relation between the variables on the x- and y-axis.</p>
+<p>You probably know the function for a trend line in Excel, a similar function is available in ggplot. Just ad the line <code>geom_smooth(method = "lm")</code>. The argument <code>lm</code> means that a linear fit is made.</p>
+<div id="exr-trendline" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.11 </strong></span>trend line</p>
+<ul>
+<li>Go back to the script for the scatter plot</li>
+<li>Add a trend line</li>
+</ul>
+</div>
+<p>If done right, you see now a straight line through the point cloud. Around the line is a grey area: the 95% condifence of the line (with 95% confidence the real linear relation is with that area). If you want to remove that area, just add the argument <code>se = FALSE</code>.</p>
+</section>
+<section id="many-more-possibilities" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="many-more-possibilities"><span class="header-section-number">2.12</span> Many more possibilities</h2>
+<p>There is a variety of possibilies to adjust your figures in ggplot. In addition other people have developed packages that make other figures (including GIS-maps) with ggplot-functionality.</p>
+<p>Because a clear figure is an excellent way to communicate research results, it is clever to invest some time learning more about ggplot.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./W01.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./W03.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,104 @@
+# Lineair models 1: Linear Regressie
+
+R has a function to fit the best linear model in a dataset.
+Most statistical tests (linear regression, one-way ANOVA, two-way ANOVA) are based on this linear model.
+The most intuitive linear model is a straight line through a cloud of data points.
+That is what you are doing with a linear regression.
+
+The function to fit the linear model is `lm()`.
+Like the t.test it's first argument is statistical formula: `response ~ explanatory`.
+In all cases the response vector needs to be numerical vector, otherwise you will get an error.
+In the case of a linear regression, the explanatory vector also needs to be an numerical vector.
+
+In you data map you'll find a file called ijklijn.xlsx.
+It is (not the best) calibration line for a colorimetric measurements:
+starch concentration:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(readxl)
+library(knitr)
+ijklijn <- read_excel("../data/ijklijn.xlsx")
+kable(ijklijn, caption="Calibration line")
+
+```
+
+To avoid complications with further functions (like `predict()`), we use an extra argument `data` to refer to the data frame object and we only use the column names (without `object$`) in the statistical model.
+
+
+::: {#exr-calibration}
+
+Calibration line
+
+Make script that runs:
+  
+* importing the data set
+* fit the best model: NB: store the output as an object using <- 
+* look at the output and try to understand the different numbers.
+* also run `summary()` with as argument the lm-object.
+  
+:::
+
+Did you find the R^2^?
+For more details about the output of the `summary()` function: [see here](https://stats.stackexchange.com/questions/5135/interpretation-of-rs-lm-output){target="_blank"}
+
+
+
+## Hypothesis testing
+
+Although it is not quite common to use regression analysis to test a hypothesis in this case: is there a relation between absorption and concentration), it is possible.
+
+With the function `anova()` you apply an **analysis of variance**.
+In short, it will test if the explanatory power of the variation in your data set by the statistical model is so good, that you can rule out the possibility that this is due to random effects.
+
+The function `anova()` needs as argument the output of the function `lm()` (that's why you needed to store the output van lm as an object).
+
+The function `anova()` creates an ANOVA table with for the explanory variable the p-value (here called **Pr(>F)**).
+
+::: {#exr-hypotest}
+Hypothesis testing 
+
+* Apply the function `anova()` on the linear model of ijklijn
+* Is there a significant relation between both vectors?
+
+:::
+
+## Predictions
+
+The most common use of regressions is to make predictions.
+In the case of a calibration line, you want to use it to estimate the concentration in unknown samples based on the absorption.
+
+You probably have done such measurements in the past by first estimate the regression line and use the parameters of that line to calculate the estimated concentrations.
+
+Luckily in R there is the function `predict()`.
+The negative side is that the function is a bit picky about the arguments.
+The first argument should be the output of the lm-function.
+So far so good.
+The next argument is the value(s) of the explanatory variable you want to make predictions for.
+Unluckily this argument should be in the format of a data frame ánd the column name should be exactly the same as in the statistical model.
+
+It is quite easy to make a data frame:
+`df <- data.frame(absorptie = 1.5)`
+
+Of course you can use a different object name than df.
+Instead of one number you can make a longer vector, e.g. `c(1.5, 2.3, 5.4)`.
+
+An interesting option is to calculate the confidence interval.
+Just add the argument `interval = "confidence"`).
+
+
+
+## practice
+
+In an experiment we want to test the assumption that the weight gain of sow's are and indication of the birth weight van piglets.
+For 10 sow's data is collected.
+You can find the data in zeugen.xlsx in your data map.
+
+::: {#exr-piglets}
+
+Piglets
+
+* Apply a linear regression.
+* Check what the p-value and the R^2^ are.
+* Predict the expected piglet weight, and confidence interval, in the situation a sow will gain 15 kg
+
+:::

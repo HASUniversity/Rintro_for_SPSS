@@ -1,0 +1,25 @@
+project:
+  type: book
+
+book:
+  title: "Introduction to R for students specialisations"
+  foreground: white
+  background: "#274232"
+  author: "Team TV"
+  chapters:
+    - index.qmd
+    - W01.qmd
+    - W02.qmd
+    - W03.qmd
+    - W04.qmd
+    - W05.qmd
+    - W06.qmd
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    link-external-newwindow: true
+
+

@@ -1,0 +1,215 @@
+# Logistic regression
+
+Up to now you have practiced with hypothese test for numerical continuous data, but in some cases the data behaves differentially.
+A common type of data is binomial: categorical data with only two outcomes.
+
+For example, a tomato grower is experimenting with the best time to harvest his tomatos:
+
+* On six plants all tomatoes are harvested 10 days before the normal harvest time
+* On four plants all tomatoes are harvested 5 days before the normal harvest time
+* On another six plants all tomatoes are harvested at the normal harvest time
+
+All harvested tomatoes are labelled ripe or not ripe:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(readxl)
+library(tidyverse)
+theme_set(theme_classic(base_size = 16))
+
+tomaat <- read_excel('../data/tomaten.xlsx')
+knitr::kable(table(tomaat$tijd, tomaat$rijp))
+
+
+```
+
+Zulke data kan je mooi presenteren in een mozaiekplot (In het Engels *mosaic plot* geheten):
+This kind of data can be clearly presented in a mosaic plot (see script for inspiration):
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(ggmosaic)
+
+tomaat %>% 
+  ggplot() +
+  geom_mosaic(aes(x=product(tijd), fill = rijp)) +
+  scale_fill_manual(values = c("green", "red")) +
+  xlab("tijd (days before harvest)") +
+  ylab("fraction ripe") +
+  theme(legend.position = "none")
+
+```
+
+A nice feature of a mosaic plot is that you can read on both x- and y-axis which fraction is found in each category.
+
+::: {#exr-ggmosaic}
+
+mosaic plots
+
+* install the package ggmosaic
+* Import the data set tomaten.xlsx
+* Make a mosaic plot with above code
+* try to find out what each line of code is doing, writh down comments
+
+:::
+
+## binomial alternative for ANOVA's and linear regressions
+
+The normal **linear model** cannot handle a binomial respons veriable.
+For that you need to use a **generalized linear model**.
+The function in R is `glm()`.
+You can add your statistical model in the same way as in the function `lm()`, but you have to add an extra argument to make clear that your respons is binomial: `family = binomial()`.
+
+::: {.callout-warning}
+
+The response variable needs to be either a numerical variable with two values, or a factor (use `factor()`)
+
+:::
+
+> H~0~: all harvest times have the same probability for ripe tomatoes
+
+> H~1~: at least some harvest times differ in probability for ripe tomatoes
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+fit <- glm(factor(rijp)~factor(tijd), family = binomial(), data = tomaat)
+
+```
+
+NB: the function `factor()` is used for the explanatory variable to make clear to R that the numerica data needs to be treated as categorical data. 
+
+The normal `anova()` function cannot handle the output of `glm()`.
+The reason is that you cannot apply a normal analysis of variance on these type of models to calculate the p-values.
+Instead you need to use the `Anova()` function from the car package:
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+car::Anova(fit)
+```
+
+
+::: {.callout-warning}
+
+The package car contains a number of functions with the same name as functions in tidyverse.
+Therefore it is not practical to activate all functions.
+Instead use the code `car::Anova()` to make R clear in which package the function can be found.
+
+:::
+
+::: {#exr-carpackage}
+
+car package
+
+* Install the car packages
+
+:::
+
+
+## Posthoc test
+
+Similar as in normal ANOVA's you can apply a posthoc test with the function `emmeans()`
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+library(emmeans)
+emmeans(fit, specs = pairwise ~ tijd)
+
+```
+
+
+## Practice
+
+A third year student Applied Biology is doing her internship at a grower and needs to test five different insecticides.
+She designed the following experiment:
+
+* A certain number of flies is exposed to one of the five insecticides
+* after one hour she counts the number of dead and still alive flies
+
+You find the data set in your data map: insecticiden.xlsx
+
+::: {#exr-insectices}
+
+Insecticides.
+
+
+* import the data set
+* Make a nice graph
+* apply a logistic regression
+* Test which insecticide kills significant more flies than the control
+
+:::
+
+
+## Regression with binomial data
+
+We can also present the data in a different way:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+tomaat %>% 
+  ggplot(aes(tijd, rijp, color = rijp)) + 
+  geom_count() +
+  scale_color_manual(values = c("green", "red")) 
+```
+
+With the function `geom_count()` completely overlapping points are represented with bigger dots.
+Alternative is `geom_jitter()` that randomly move the points a bit to reduce overlap.
+
+Now we have on the x-axis not categories, but a continuous scale.
+
+Can we do something with regression?
+The answer is yes!
+
+As with `lm()` the function `glm()` can perform both ANOVAs and regressions.
+This time the regression is not linear, but logistic: a **logistic regression**.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+fit2 <- glm(factor(rijp) ~ tijd, family = binomial(), data = tomaat)
+```
+
+The only difference with the previous analysis is that now the variable tijd is NOT a factor.
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+car::Anova(fit2)
+
+```
+
+
+For the tomato grower it is important to know from what time at least 25% of the tomatoes is ripe.
+
+We can visualise that by adding a trend line (this time `method = glm`) and a horizontal line through 0.25:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+tomaat %>% 
+  mutate(rijp = recode(rijp, rijp=1, onrijp=0)) %>%
+  ggplot(aes(tijd, rijp)) + 
+  geom_count() +
+  geom_smooth(method=glm, method.args = list(family = binomial())) +
+  ylab("Fractie rijp") +
+  geom_hline(yintercept = 0.25, color = "blue", linetype = "dashed") +
+  theme(legend.position = "none") 
+```
+
+Now you see the typical S-shape of a logistic regression.
+From five days before the normal harvest data the fraction ripe tomatoes is above the threshold.
+
+::: {.callout-warning}
+
+Within ggplot the function `glm()` cannot handle a factor response, but only 0 and 1 values. With the `recode` you can change your text to other values.
+
+:::
+
+::: {#exr-guppies}
+
+Guppies
+
+
+Pitkow *et al.* (1960) studied the effect of exposure to low temperature on the survival of guppies.
+He exposed each time 40 guppies to water at 5°C, for 3, 8, 12 or 18 minutes. 
+
+* import the data set (guppies.xlsx)
+* make a clear graph, add a trend line
+* apply a logistic regression
+* what are your conclusions
+
+:::
+

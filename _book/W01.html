@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to R for students specialisations - 1&nbsp; Start with RStudio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./W02.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to R for students specialisations</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Setup</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W01.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W02.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W03.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W04.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W05.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear models 2: ANOVA’s and Posthoc Tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W06.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#installing" id="toc-installing" class="nav-link active" data-scroll-target="#installing"> <span class="header-section-number">1.1</span> Installing</a></li>
+  <li><a href="#console" id="toc-console" class="nav-link" data-scroll-target="#console"> <span class="header-section-number">1.2</span> Console</a></li>
+  <li><a href="#objects" id="toc-objects" class="nav-link" data-scroll-target="#objects"> <span class="header-section-number">1.3</span> Objects</a></li>
+  <li><a href="#Vectors" id="toc-Vectors" class="nav-link" data-scroll-target="#Vectors"> <span class="header-section-number">1.4</span> Vectors</a></li>
+  <li><a href="#functies" id="toc-functies" class="nav-link" data-scroll-target="#functies"> <span class="header-section-number">1.5</span> Functies</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"> <span class="header-section-number">1.6</span> Packages</a></li>
+  <li><a href="#r-project" id="toc-r-project" class="nav-link" data-scroll-target="#r-project"> <span class="header-section-number">1.7</span> R-project</a></li>
+  <li><a href="#script" id="toc-script" class="nav-link" data-scroll-target="#script"> <span class="header-section-number">1.8</span> Script</a></li>
+  <li><a href="#data-frame" id="toc-data-frame" class="nav-link" data-scroll-target="#data-frame"> <span class="header-section-number">1.9</span> Data frame</a></li>
+  <li><a href="#summary-part-1" id="toc-summary-part-1" class="nav-link" data-scroll-target="#summary-part-1"> <span class="header-section-number">1.10</span> Summary part 1</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>RStudio is free software and available for Windows, macOS and Linux.</p>
+<p>R is a computer language, developed in New Zealand, in 1995, maintained by the R Core Team. In make life easier an an <strong>Integrated Development Environment</strong> (<em>IDE</em>) is developed: RStudio. With the combination of R and RStudio you can easily handle data, make analyses and create figures.</p>
+<section id="installing" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="installing"><span class="header-section-number">1.1</span> Installing</h2>
+<p>You need to install both R and RStudio. You can find the links <a href="https://posit.co/download/rstudio-desktop/" target="_blank">here</a> vinden.</p>
+<div id="exr-install" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.1 </strong></span>Install the software</p>
+<ul>
+<li>Click on the link above</li>
+<li>Follow the first step to install R. Click on <em>install for the first time</em>. Always choose <em>yes</em> and <em>OK</em>.</li>
+<li>Go back to the first website and follow step 2. Choose the most recent free stand alone version of RStudio.</li>
+<li>Open RStudio</li>
+</ul>
+</div>
+</section>
+<section id="console" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="console"><span class="header-section-number">1.2</span> Console</h2>
+<p>When you have opened RStudio, you see at the left bottom the <strong>console</strong>. This is the place where you give the computer R commands. The term originates from the time that computers were the size of a (modern) fridge, and giving commands via a separate keyboard and screen (often incorporated in a desk): the console. Nowadays everything is integrated in a laptop, and the commands are often hidden behind icons.</p>
+<p>At the bottem you see <code>&gt;</code>. That is the <em>prompt</em>, right after you can type commands.</p>
+<p>Most of you are not familiar with communicating with computers via language, so it is important to practice it a bit.</p>
+<div id="exr-commands" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.2 </strong></span>Calculation excercise</p>
+<ul>
+<li>Give R some calculation commands, e.g.&nbsp;<code>4*2</code>. Don’t put a = for or after the command. End your command with <em>enter</em>.</li>
+<li>try also square roots (<code>sqrt()</code>), the power (<code>3^2</code>), pi (<code>pi</code>).</li>
+</ul>
+</div>
+</section>
+<section id="objects" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="objects"><span class="header-section-number">1.3</span> Objects</h2>
+<p>Often you want to use the outcome of a calculation in the next step. You can put the outcome in the computer memory by giving it a name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">*</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>of</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">*</span><span class="dv">2</span> <span class="ot">-&gt;</span> outcome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The arrow (<code>&lt;-</code>) means that the name (the <em>object</em>) where it points to, get the value which is at the other end of the arrow.</p>
+<p>Most often the left pointing arrow is used (<code>&lt;-</code>), which you can write instantly with surrounding spaces with the short-cut <code>alt-</code>. Objects always need to start with a letter and should not contain any spaces.</p>
+<p>By just writing the object name in the console you can call the value of that object. And good to know that R distuinguished normal and capital letters.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>use object names that make sense, you will recognize the purpose the day after.</p>
+</div>
+</div>
+<div id="exr-objects" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.3 </strong></span>Objects</p>
+<ul>
+<li>make objects for your name, place of residence, age and favorite number. NB:you need to start and end a text string with <code>"</code> to make clear it is a valua and not an object name. For numbers, don’t use <code>"</code>!</li>
+<li>call one-by-one the different objects</li>
+<li>let R sum up your age and favorite number (Nb: use the object names!)</li>
+<li>Try also sum up name and place of residence. You will get an error. Read it carefully and try to understand the meaning of the error</li>
+</ul>
+</div>
+</section>
+<section id="Vectors" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="Vectors"><span class="header-section-number">1.4</span> Vectors</h2>
+<p>Objects can be combined in a <em>vector</em>, with the function <code>c()</code>(c stands for <em>combine</em>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">c</span>(naam, woonplaats, leeftijd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The vector is an object on its own, containing multiple <em>values</em> from the other objects. In this case we have named this vector <em>p1</em>, but you can choose a different name if you like. Vectors are widely used in R, especially in statistical functions.</p>
+<p>You can call the values seperately by using an <em>index number</em> after the object name: e.g.&nbsp;<code>p1[2]</code>. Within the square brackets <code>[]</code> you give the item number in the vector. The first item has index number 1.</p>
+<p>You also can give multiple index numbers, using the function <code>c()</code>: e.g.&nbsp;<code>p1[c(1,3)]</code>, or using the minus sign to exclude one or more: e.g.&nbsp;<code>p1[-2]</code>.</p>
+<div id="exr-indexnumbers" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.4 </strong></span>Index numbers</p>
+<ul>
+<li>make a vectore with the range 1 to 10 (easily made in R with the code <code>1:10</code>). Give it an object name.</li>
+<li>Practice with calling different numbers from the range using index numbers.</li>
+<li>Call the complete vector, except the last value.</li>
+<li>Find a clever way to call at once index numbers 3-7.</li>
+</ul>
+</div>
+<p>If vectors only contain numbers, you can make calculations with the complete vector.</p>
+<div id="exr-vectors" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.5 </strong></span>Vectors</p>
+<ul>
+<li>Create a vector with the rang 1-4</li>
+<li>Multiple the vector by 2. What happens?</li>
+<li>Try also different calculations.</li>
+<li>What happens if you multiply the vector by itself?</li>
+</ul>
+</div>
+</section>
+<section id="functies" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="functies"><span class="header-section-number">1.5</span> Functies</h2>
+<p>Functions are the foundation of R (and every other computer language). They are in essence small factories changing input to output. The output can be a number, but also a grpah or even the creation of a file.</p>
+<p>For illustration purposes the function <code>mean()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hiermee geef je R de opdracht het gemiddelde te berekenen van de getallen in vector v.</p>
+<div id="exr-functions" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.6 </strong></span>Functions</p>
+<ul>
+<li>calculate the mean of the vector from last excercise.</li>
+<li>Apply also the next functions:
+<ul>
+<li>length()</li>
+<li>sd()</li>
+<li>min()</li>
+<li>max()</li>
+<li>range()</li>
+<li>summary()</li>
+</ul></li>
+<li>Find out what these functions do. Tip: you can use <code>?functionname</code> to open a help page.</li>
+</ul>
+</div>
+<p>The input in a function is called an <strong>argument</strong>. Many functions can have multiple arguments. Some of them are required, otherwise you get an error. Other arguments are not required, and have standard values. You only need to add them, if you want to have another values for those arguments. In the next lesson, about t-tests, you will find both types of arguments.</p>
+<p>NB: all arguments have names. It is a good custom to name them in your functions (e.g.&nbsp;<code>mean(x=p1)</code>), otherwise R will assume the order of arguments based on how the function is programmed. You find the argument named with the helper pages using <code>?</code>.</p>
+</section>
+<section id="packages" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="packages"><span class="header-section-number">1.6</span> Packages</h2>
+<p>R has a great number of base functions available, but people have developed many more functions. These functions are available in so called <em>packages</em>. Packages are bundles of functions, often developed for specific purposes (e.g.&nbsp;making nice graphs). These packages are tested and available from a save location (CRAN-website). You can install them with the function <code>install.packages()</code>. As argument you give the package name. NB: it is text, so you need <code>"</code>.</p>
+<p>You only need to install it once on your computer. It is like buying a book (but then for free!) and store it in your bookshelf.</p>
+<p>For this course we use many functions out of a collection of packages called <strong>tidyverser</strong>. We also use the package <strong>readxl</strong> to import Excel files.</p>
+<div id="exr-packages" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.7 </strong></span>Install packages</p>
+<ul>
+<li>Install the packages tidyverse and readxl. NB: installing tidyverse takes time, wait until you see the cursor again.</li>
+</ul>
+</div>
+<p>Placing a book in the bookshelf, does not mean you can read it. In order to use a function from a package you need to activate with the function <code>library()</code>. The reason is that some packages contain functions with the same name. It is saver to only activate packages you need.</p>
+</section>
+<section id="r-project" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="r-project"><span class="header-section-number">1.7</span> R-project</h2>
+<p>The power of RStudio is the way you can organise data analysis in projects. By linking a project environment to a map on your computer, you can store the history of your data analysis for that specific map and RStudio use that map as the default to search and store files (replacing the old R-code <code>setwd()</code> to define the working directory). You can start a project in an existing folder, or make a new map (RStudio uses the old name directory for a map).</p>
+<p>For this course, I already created a map in Teams which you need to synchronise with your computer in order to work with.</p>
+<p>You can open the project from within RStudio: <strong>File</strong> -&gt; <strong>Open project</strong>, or next time by double clicking on the R-project file in your map. Then it will automatically open RStudio in your project mode.</p>
+</section>
+<section id="script" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="script"><span class="header-section-number">1.8</span> Script</h2>
+<p>Nice that you can communicate with the computer via de console, but how do you remember what you did last week? The solution is to write your codes in a text document and execute the codes from there. Such a text document is called a <strong>script</strong>. If you save your script in your project map, you only need to open it to see what you did last time.</p>
+<p>You can open a new script by either clicking on the plus sign in the menu, or use the short-cut <strong>ctr</strong>+<strong>shift</strong>+<strong>n</strong>.</p>
+<div id="exr-script" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.8 </strong></span>Setup script</p>
+<ul>
+<li>type in the first row the next code <code>library(readxl)</code>.</li>
+<li>in th next row type `temp &lt;- read_excel(“data/lichaamstemperatuur.xlsx”)</li>
+<li>Save the script as <em>Bodytemp.R</em> in je R-folder.</li>
+</ul>
+</div>
+<p>With the short-cut <strong>Ctrl</strong>+<strong>Enter</strong> you can run the row where your cursor is. It automatically goes to the next row, so you can by repeatly using the short-cut run all codes in your script. You can also select all or part of the code and run it at once with the same short-cut.</p>
+<div id="exr-runecode" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.9 </strong></span>Run code</p>
+<ul>
+<li>execute the codes from your script row by row</li>
+<li>Observe what it is doing</li>
+</ul>
+</div>
+<p>To make your codes more clear, you can add comments. Text starting with # will be recognized as comments, and not executed. It is a good habit to add comments in your scripts, so other people can understand what you were doing.</p>
+<div id="exr-comments" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.10 </strong></span>Comments</p>
+<ul>
+<li>Include above both rows of code in the scrip an extra row describing the code below as a comment</li>
+</ul>
+</div>
+</section>
+<section id="data-frame" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="data-frame"><span class="header-section-number">1.9</span> Data frame</h2>
+<p>By running both rows of code, if correct you see on the right top side the object bodytemp. The object is the data from the Excel file, and is called a <strong>data frame</strong>.</p>
+<div id="exr-dataframe" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.11 </strong></span>Data frame</p>
+<ul>
+<li>add the next code to your script: <code>str(bodetemp)</code>, and run that code.</li>
+</ul>
+</div>
+<p><em>Str</em> stands for structure and with this function you can see the intern structure of the objec</p>
+<p>You get the following output:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [130 × 3] (S3: tbl_df/tbl/data.frame)
+ $ tc : num [1:130] 35.7 35.9 36.1 36.1 36.2 36.2 36.2 36.2 36.3 36.3 ...
+ $ gen: chr [1:130] "man" "man" "man" "man" ...
+ $ hr : num [1:130] 70 71 74 80 73 75 82 64 69 70 ...</code></pre>
+</div>
+</div>
+<p>The top row shows the type of object. In this case it has three labels: <em>tbl_df</em>, <em>tbl</em> en <em>data.frame</em>. Sounds complicated, but all three say that it is a ** data frame**.</p>
+<p>Every column is in fact a vector. They are listed after the <strong>$</strong>. The type of data in each vector is given (<strong>num</strong> = numeric, <strong>chr</strong> = character (= text)). Between the brackets ([]) you can find how long the vectors are.</p>
+<p>There are several ways to look at your data frame:</p>
+<ul>
+<li>Via the object name (<code>bodytemp</code>)</li>
+<li>With the function <code>View()</code></li>
+<li>In the right top window, by clicking on the object name</li>
+</ul>
+<div id="exr-view" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.12 </strong></span>View your Data frame</p>
+<ul>
+<li>Try the three ways to view your data frame</li>
+</ul>
+</div>
+<p>Often, you only need certain vectors (columns) from your data frame. You can call these vectors seperately by using the sign <strong>$</strong> after the object name of the data frame. In case of the bodytemp data set: <code>bodytemp$tc</code> will show you the vector tc.</p>
+<div id="exr-vector" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.13 </strong></span>call vector from data frame</p>
+<ul>
+<li>Write a code that will calculate the average of the vector tc.</li>
+</ul>
+</div>
+<div id="exr-owndataset" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.14 </strong></span>Own data set</p>
+<ul>
+<li>Use, or make an Excel file of a own data set (e.g.&nbsp;from your internship)</li>
+<li>Start a new script and write code that will import that data</li>
+<li>View your data in RStudio</li>
+</ul>
+</div>
+</section>
+<section id="summary-part-1" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="summary-part-1"><span class="header-section-number">1.10</span> Summary part 1</h2>
+<p>You now have the basic skills of working in RStudio.</p>
+<ul>
+<li>You can use R commands to make calculations</li>
+<li>You can work with RSTudio projects and scripts</li>
+<li>You know what data frames and vectors are, and make calculations with them</li>
+<li>You can import data from Excel files</li>
+</ul>
+<p>In the next chapter you use these skills to apply statistics.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Setup</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./W02.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

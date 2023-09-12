@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to R for students specialisations - 6&nbsp; Logistic regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./W05.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to R for students specialisations</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Setup</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W01.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W02.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W03.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W04.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W05.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear models 2: ANOVA’s and Posthoc Tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W06.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#binomial-alternative-for-anovas-and-linear-regressions" id="toc-binomial-alternative-for-anovas-and-linear-regressions" class="nav-link active" data-scroll-target="#binomial-alternative-for-anovas-and-linear-regressions"> <span class="header-section-number">6.1</span> binomial alternative for ANOVA’s and linear regressions</a></li>
+  <li><a href="#posthoc-test" id="toc-posthoc-test" class="nav-link" data-scroll-target="#posthoc-test"> <span class="header-section-number">6.2</span> Posthoc test</a></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"> <span class="header-section-number">6.3</span> Practice</a></li>
+  <li><a href="#regression-with-binomial-data" id="toc-regression-with-binomial-data" class="nav-link" data-scroll-target="#regression-with-binomial-data"> <span class="header-section-number">6.4</span> Regression with binomial data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Up to now you have practiced with hypothese test for numerical continuous data, but in some cases the data behaves differentially. A common type of data is binomial: categorical data with only two outcomes.</p>
+<p>For example, a tomato grower is experimenting with the best time to harvest his tomatos:</p>
+<ul>
+<li>On six plants all tomatoes are harvested 10 days before the normal harvest time</li>
+<li>On four plants all tomatoes are harvested 5 days before the normal harvest time</li>
+<li>On another six plants all tomatoes are harvested at the normal harvest time</li>
+</ul>
+<p>All harvested tomatoes are labelled ripe or not ripe:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">onrijp</th>
+<th style="text-align: right;">rijp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">-10</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Zulke data kan je mooi presenteren in een mozaiekplot (In het Engels <em>mosaic plot</em> geheten): This kind of data can be clearly presented in a mosaic plot (see script for inspiration):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmosaic)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tomaat <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_mosaic</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">product</span>(tijd), <span class="at">fill =</span> rijp)) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"tijd (days before harvest)"</span>) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"fraction ripe"</span>) <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="W06_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>A nice feature of a mosaic plot is that you can read on both x- and y-axis which fraction is found in each category.</p>
+<div id="exr-ggmosaic" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.1 </strong></span>mosaic plots</p>
+<ul>
+<li>install the package ggmosaic</li>
+<li>Import the data set tomaten.xlsx</li>
+<li>Make a mosaic plot with above code</li>
+<li>try to find out what each line of code is doing, writh down comments</li>
+</ul>
+</div>
+<section id="binomial-alternative-for-anovas-and-linear-regressions" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="binomial-alternative-for-anovas-and-linear-regressions"><span class="header-section-number">6.1</span> binomial alternative for ANOVA’s and linear regressions</h2>
+<p>The normal <strong>linear model</strong> cannot handle a binomial respons veriable. For that you need to use a <strong>generalized linear model</strong>. The function in R is <code>glm()</code>. You can add your statistical model in the same way as in the function <code>lm()</code>, but you have to add an extra argument to make clear that your respons is binomial: <code>family = binomial()</code>.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The response variable needs to be either a numerical variable with two values, or a factor (use <code>factor()</code>)</p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>H<sub>0</sub>: all harvest times have the same probability for ripe tomatoes</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>H<sub>1</sub>: at least some harvest times differ in probability for ripe tomatoes</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">factor</span>(rijp)<span class="sc">~</span><span class="fu">factor</span>(tijd), <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> tomaat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>NB: the function <code>factor()</code> is used for the explanatory variable to make clear to R that the numerica data needs to be treated as categorical data.</p>
+<p>The normal <code>anova()</code> function cannot handle the output of <code>glm()</code>. The reason is that you cannot apply a normal analysis of variance on these type of models to calculate the p-values. Instead you need to use the <code>Anova()</code> function from the car package:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II tests)
+
+Response: factor(rijp)
+             LR Chisq Df Pr(&gt;Chisq)  
+factor(tijd)   6.6179  2    0.03655 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The package car contains a number of functions with the same name as functions in tidyverse. Therefore it is not practical to activate all functions. Instead use the code <code>car::Anova()</code> to make R clear in which package the function can be found.</p>
+</div>
+</div>
+<div id="exr-carpackage" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.2 </strong></span>car package</p>
+<ul>
+<li>Install the car packages</li>
+</ul>
+</div>
+</section>
+<section id="posthoc-test" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="posthoc-test"><span class="header-section-number">6.2</span> Posthoc test</h2>
+<p>Similar as in normal ANOVA’s you can apply a posthoc test with the function <code>emmeans()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(fit, <span class="at">specs =</span> pairwise <span class="sc">~</span> tijd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ tijd emmean   SE  df asymp.LCL asymp.UCL
+  -10  -1.61 1.10 Inf    -3.756     0.538
+   -5   1.10 1.15 Inf    -1.165     3.362
+    0   1.61 1.10 Inf    -0.538     3.756
+
+Results are given on the logit (not the response) scale. 
+Confidence level used: 0.95 
+
+$contrasts
+ contrast             estimate   SE  df z.ratio p.value
+ (tijd-10) - (tijd-5)   -2.708 1.59 Inf  -1.701  0.2046
+ (tijd-10) - tijd0      -3.219 1.55 Inf  -2.078  0.0945
+ (tijd-5) - tijd0       -0.511 1.59 Inf  -0.321  0.9448
+
+Results are given on the log odds ratio (not the response) scale. 
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+</section>
+<section id="practice" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="practice"><span class="header-section-number">6.3</span> Practice</h2>
+<p>A third year student Applied Biology is doing her internship at a grower and needs to test five different insecticides. She designed the following experiment:</p>
+<ul>
+<li>A certain number of flies is exposed to one of the five insecticides</li>
+<li>after one hour she counts the number of dead and still alive flies</li>
+</ul>
+<p>You find the data set in your data map: insecticiden.xlsx</p>
+<div id="exr-insectices" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.3 </strong></span>Insecticides.</p>
+<ul>
+<li>import the data set</li>
+<li>Make a nice graph</li>
+<li>apply a logistic regression</li>
+<li>Test which insecticide kills significant more flies than the control</li>
+</ul>
+</div>
+</section>
+<section id="regression-with-binomial-data" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="regression-with-binomial-data"><span class="header-section-number">6.4</span> Regression with binomial data</h2>
+<p>We can also present the data in a different way:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tomaat <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(tijd, rijp, <span class="at">color =</span> rijp)) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"red"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="W06_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>With the function <code>geom_count()</code> completely overlapping points are represented with bigger dots. Alternative is <code>geom_jitter()</code> that randomly move the points a bit to reduce overlap.</p>
+<p>Now we have on the x-axis not categories, but a continuous scale.</p>
+<p>Can we do something with regression? The answer is yes!</p>
+<p>As with <code>lm()</code> the function <code>glm()</code> can perform both ANOVAs and regressions. This time the regression is not linear, but logistic: a <strong>logistic regression</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">factor</span>(rijp) <span class="sc">~</span> tijd, <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> tomaat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The only difference with the previous analysis is that now the variable tijd is NOT a factor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II tests)
+
+Response: factor(rijp)
+     LR Chisq Df Pr(&gt;Chisq)  
+tijd   5.9506  1    0.01471 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>For the tomato grower it is important to know from what time at least 25% of the tomatoes is ripe.</p>
+<p>We can visualise that by adding a trend line (this time <code>method = glm</code>) and a horizontal line through 0.25:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tomaat <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rijp =</span> <span class="fu">recode</span>(rijp, <span class="at">rijp=</span><span class="dv">1</span>, <span class="at">onrijp=</span><span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(tijd, rijp)) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>() <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>glm, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="fu">binomial</span>())) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Fractie rijp"</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.25</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="W06_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now you see the typical S-shape of a logistic regression. From five days before the normal harvest data the fraction ripe tomatoes is above the threshold.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Within ggplot the function <code>glm()</code> cannot handle a factor response, but only 0 and 1 values. With the <code>recode</code> you can change your text to other values.</p>
+</div>
+</div>
+<div id="exr-guppies" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.4 </strong></span>Guppies</p>
+<p>Pitkow <em>et al.</em> (1960) studied the effect of exposure to low temperature on the survival of guppies. He exposed each time 40 guppies to water at 5°C, for 3, 8, 12 or 18 minutes.</p>
+<ul>
+<li>import the data set (guppies.xlsx)</li>
+<li>make a clear graph, add a trend line</li>
+<li>apply a logistic regression</li>
+<li>what are your conclusions</li>
+</ul>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./W05.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear models 2: ANOVA’s and Posthoc Tests</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

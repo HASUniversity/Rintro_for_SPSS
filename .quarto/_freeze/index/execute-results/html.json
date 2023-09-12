@@ -1,0 +1,14 @@
+{
+  "hash": "67dcae25239bda0651163c3b6eb551c3",
+  "result": {
+    "markdown": "--- \ndate: '2023-09-11'\nlisting:\n  contents: modules\n  type: grid\n  categories: true\n  sort-ui: false\n  sort: \n    - title\n    - subtitle\n    - categories\n  filter-ui: [title, date, description, sub-title, categories]\n  fields: [image, title, subtitle, description]\npage-layout: full\ntitle-block-banner: false\n--- \n\n\n\nIn the past years you have learned to apply statistical analyses, using SPSS.\nMaybe you have noticed, e.g. during your internships, that other statistical software programs are used as well.\nOne of the most widely used statistical software is R.\nIt is open source, free to use, and supported by many active users.\nBut ... it is based on writing code, and that needs some practice.\n\nWe expect that you understand why you need to use statistics in applied research, and are familiar with t-tests, linear regressions and anova's (including post-hoc tests).\n\n\n## Setup {-}\n\nThis manual is setup for self study, but we have supporting lessons with a short introduction of the week's content and time for questions.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

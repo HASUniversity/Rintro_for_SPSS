@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to R for students specialisations - 3&nbsp; T-tests</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./W04.html" rel="next">
+<link href="./W02.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to R for students specialisations</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Setup</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W01.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Start with RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W02.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W03.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W04.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W05.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear models 2: ANOVA’s and Posthoc Tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./W06.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link active" data-scroll-target="#one-sample-t-test"> <span class="header-section-number">3.1</span> One-sample t-test</a>
+  <ul class="collapse">
+  <li><a href="#one-sided-and-two-sided-tests" id="toc-one-sided-and-two-sided-tests" class="nav-link" data-scroll-target="#one-sided-and-two-sided-tests"> <span class="header-section-number">3.1.1</span> One sided and two sided tests</a></li>
+  <li><a href="#climate-change" id="toc-climate-change" class="nav-link" data-scroll-target="#climate-change"> <span class="header-section-number">3.1.2</span> Climate change</a></li>
+  </ul></li>
+  <li><a href="#independent-t-test" id="toc-independent-t-test" class="nav-link" data-scroll-target="#independent-t-test"> <span class="header-section-number">3.2</span> Independent t-test</a>
+  <ul class="collapse">
+  <li><a href="#fertilization" id="toc-fertilization" class="nav-link" data-scroll-target="#fertilization"> <span class="header-section-number">3.2.1</span> Fertilization</a></li>
+  </ul></li>
+  <li><a href="#paired-t-test" id="toc-paired-t-test" class="nav-link" data-scroll-target="#paired-t-test"> <span class="header-section-number">3.3</span> Paired t-test</a>
+  <ul class="collapse">
+  <li><a href="#macho-blackbirds" id="toc-macho-blackbirds" class="nav-link" data-scroll-target="#macho-blackbirds"> <span class="header-section-number">3.3.1</span> Macho blackbirds</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">T-tests</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>There are three types of t-tests:</p>
+<ul>
+<li>One sample t-test</li>
+<li>Paired t-test</li>
+<li>Independent t-test</li>
+</ul>
+<p>All three tests can be applied with one function <code>t.test()</code>, thanks to the possibility of multiple arguments in one function.</p>
+<p>In the next section we need the data set bodytemp, which you already imported.</p>
+<section id="one-sample-t-test" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="one-sample-t-test"><span class="header-section-number">3.1</span> One-sample t-test</h2>
+<p>The simplest version of a t-test is when you want to test if the average of a single population is different from a theoretical value. So, you collect a <strong>random</strong> sample from a population, e.g.&nbsp;the body temperature of 130 students.</p>
+<p>The next step is to define your hypotheses:</p>
+<blockquote class="blockquote">
+<p>H<sub>0</sub>: Temperature is not different from 37 degrees Celsius. H<sub>1</sub>: Temperature is different from 37 degrees Celsius.</p>
+</blockquote>
+<p>The general idea is that human’s body temperature is on average 37 degrees Celsius, hence this H<sub>0</sub>. The symbol for the population average is <span class="math inline">\(\mu\)</span>, pronounced as mu.</p>
+<p>Third step is testing the hypothesis with the function <code>t.test(x, mu = ..)</code>.</p>
+<p>For a one-sample t-test (as we need now), the first argument should be a vector, containing the <strong>sample</strong> to be tested. The other argument needed is mu, which is <span class="math inline">\(\mu\)</span> from the H<sub>0</sub>. NB: mu is not second in row in the list of possible arguments, therefore you need to name it in your code followed by <code>=</code> and the value.</p>
+<p>The output gives a lot of information. Most important, for hypothesis testing, is the p-value. P-values less than the threshold <span class="math inline">\(\alpha\)</span> (often 0.05) means that you reject the H<sub>0</sub> and accept the H<sub>1</sub>. But also usefull is the 95% confidence interval. It shows the lower and upper limit where, with 95% confidence, of the real average.</p>
+<div id="exr-vectors2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.1 </strong></span>Vectors and data frames</p>
+<ul>
+<li>refresh your memory about vectors and data frames. How can you call a vector from a data frame?</li>
+</ul>
+</div>
+<div id="exr-onesttest" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.2 </strong></span>One sample t-test</p>
+<ul>
+<li>Test with a one-sample t-test if the average body temperature deviates from 37 degrees celsius (add the code to your script.</li>
+<li>Write down your conclusions as a comment in the script.</li>
+</ul>
+</div>
+<section id="one-sided-and-two-sided-tests" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="one-sided-and-two-sided-tests"><span class="header-section-number">3.1.1</span> One sided and two sided tests</h3>
+<p>With a t-test you can test one and two sided. The default setting in the function <code>t.test()</code> is two sided. But there are situations you want to test if the average value is <strong>lower</strong> than a certain value. Your H<sub>1</sub> is then: <span class="math inline">\(\mu\)</span> &lt; 37. By giving the argument <strong>alternative</strong> the value <strong>less</strong>, you test one sided. In the situation you want to test <span class="math inline">\(\mu\)</span> &gt; 37, you need to use the value <strong>greater</strong>.</p>
+<div id="exr-onesided" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.3 </strong></span>Testing one sided</p>
+<ul>
+<li>copy your t.test code to a new row and adjust it so it will test if <span class="math inline">\(\mu\)</span> &lt; 37.</li>
+<li>Compare the outcome</li>
+</ul>
+</div>
+</section>
+<section id="climate-change" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="climate-change"><span class="header-section-number">3.1.2</span> Climate change</h3>
+<p>In the last years the role of humans in climate change is becoming more clear. That is ilustrated in below figure, showing the week average in the Bilt in the period before 1950 and from 2000 (data: KNMI).</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="W03_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now it is your turn to test, for a specific week if the temperatures, from 2000 onward, are on average higher than before 1950. You all have a data set in your project map for a specific week number. Check the average pre 1950 temperature for the same week number in the table below.</p>
+<div id="exr-climatechange1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.4 </strong></span>Climate change</p>
+<ul>
+<li>Open a new script, save it under a logical name</li>
+<li>Write down the H<sub>0</sub> and the H<sub>1</sub> as comments in the script</li>
+<li>write down codes for importing the data set and the one sample t-test.</li>
+<li>Write down your conclusions as comment in the script.</li>
+</ul>
+</div>
+<p>Average temperature per week in period 1901-1950:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> weeknumber </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> pre1950 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2.83 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 2.27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1.95 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2.13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 2.16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 2.36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 2.82 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 3.47 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 3.71 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 4.57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 5.90 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 6.59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 7.02 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 8.06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 8.37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 8.95 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 10.35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 11.18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 12.10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 13.63 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 14.14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 14.48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 14.36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 15.07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 15.19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 15.99 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 16.69 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 16.58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 16.48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 16.48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 16.35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 15.98 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 15.68 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 15.48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:right;"> 14.83 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 13.82 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:right;"> 13.23 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39 </td>
+   <td style="text-align:right;"> 12.28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 11.24 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 10.44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:right;"> 9.55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43 </td>
+   <td style="text-align:right;"> 8.02 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 7.16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:right;"> 6.19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 5.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 4.39 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 4.15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49 </td>
+   <td style="text-align:right;"> 3.44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 2.98 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51 </td>
+   <td style="text-align:right;"> 2.18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52 </td>
+   <td style="text-align:right;"> 2.46 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 53 </td>
+   <td style="text-align:right;"> 2.29 </td>
+  </tr>
+</tbody>
+</table></div>
+
+</div>
+</div>
+</section>
+</section>
+<section id="independent-t-test" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="independent-t-test"><span class="header-section-number">3.2</span> Independent t-test</h2>
+<p>Up to now we have tested one group against a theoretic average. But often you want to compare two groups. In that case you have an <strong>independent</strong> (or <strong>explanatory</strong>) variable, which states to what group the observation belongs.</p>
+<p>In the function <code>t.test()</code> you can use as first argument a <strong>statistical formula</strong> instead of a single vector. Such a formula always has the form <code>dependent ~ independent</code>.</p>
+<p>The <strong>dependent</strong> (or <strong>response</strong>) variable is the variable you are interested in and which variation you want to explain.</p>
+<p>In the data set bodytemp we have the column <strong>gen</strong> giving the gender of the students.</p>
+<div id="exr-independettest" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.5 </strong></span>Independent t-test</p>
+<ul>
+<li>Test if the average body temperature of male and female students significant differ. Add the code to the bodytemp script</li>
+<li>Write down the conclusions as comments in your script</li>
+</ul>
+</div>
+<section id="fertilization" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="fertilization"><span class="header-section-number">3.2.1</span> Fertilization</h3>
+<p>In your data map you find a Excel file called bemesting.xlsx. It contains data of an experiments where plant length is measured on plants that were or were not fertilized.</p>
+<div id="exr-fertilization" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.6 </strong></span>Fertilization</p>
+<ul>
+<li>Make a new script, give it a logical name</li>
+<li>Write code that import the bemesting.xlsx file</li>
+<li>Test if fertilization has an effect on plant length. NB: consider if it makes sense to test one-sided</li>
+<li>Write down the conclusions as a comment in the script</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="paired-t-test" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="paired-t-test"><span class="header-section-number">3.3</span> Paired t-test</h2>
+<p>With the independent t-test, you have two groups that are sampled independently from each other, where both groups have a different treatment. But there are situations that you apply two treatments on the same research objects.</p>
+<p>For example, students do a math test before and after drinking a few glasses of beer. Of course you expect that the math capacity will decrease after drinking beer. The hypotheses are:</p>
+<blockquote class="blockquote">
+<p>H<sub>0</sub>: Score before drinking is equal to score after drinking beer.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>H<sub>1</sub>: Score before drinking is higher then score after drinking beer.</p>
+</blockquote>
+<p>Under the H<sub>0</sub> you expect that the scores are on average equal before and after drinking. With other words: the difference between before and after is on average 0.</p>
+<p>How can you test that with a t-test?</p>
+<ol type="a">
+<li>Calculate for each student the difference of both tests</li>
+<li>Apply a one-sample t-test for the difference with <span class="math inline">\(\mu\)</span>=0</li>
+</ol>
+<p>But you can apply both steps at once with a paired t-test, so you don’t need to first calculate the difference.</p>
+<p>With paired data it is important that it is clear which observations are paired. A good habit is to store paired data on the same row in your Excel spreadsheet:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table>
+<caption>Beer experiment</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> student </th>
+   <th style="text-align:right;"> before </th>
+   <th style="text-align:right;"> after </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>This setup is called a <strong>wide table</strong>. The consequence is that the response variable is not in one column, and therefor you cannot use the standard notation of a statistical formula.</p>
+<p>Luckily the function <code>t.test()</code> also can handle the input of two vectors: <code>t.test(x,y)</code>. To make clear to R that we want to apply a paired t-test, we need to set the argument <strong>paired</strong> to TRUE: <code>t.test(x,y, paired = TRUE)</code>. NB: TRUE needs to be written in capital letters. For lacy people: you also just use the capital letter T.</p>
+<div class="cell">
+
+</div>
+<div id="exr-beer" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.7 </strong></span>beer</p>
+<ul>
+<li>make a new script, and write a code to import bier.xlsx (from your data map)</li>
+<li>import the data, and test if there is an negative effect of beer on the math score (write down your code in the script).</li>
+<li>Write down your conclusions as a comment in the script.</li>
+</ul>
+</div>
+<section id="macho-blackbirds" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="macho-blackbirds"><span class="header-section-number">3.3.1</span> Macho blackbirds</h3>
+<p>Research has indicated that higher testosterone levels have a negative effect on resistance against diseases. This hypothesis is tested in red-winged blackbirds. In thirteen male birds antibody levels were measured before and after placing a testosterone producing implant. You find the data in blackbirds.xlsx in your data map.</p>
+<div id="exr-blackbirds" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.8 </strong></span>Macho blackbirds</p>
+<ul>
+<li>Test if the implant has a positive effect on antibody production</li>
+<li>Write down your conclusions in the script</li>
+</ul>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./W02.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Figures via ggplot</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./W04.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lineair models 1: Linear Regressie</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

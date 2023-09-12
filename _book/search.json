@@ -1,0 +1,331 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to R for students specialisations",
+    "section": "",
+    "text": "In the past years you have learned to apply statistical analyses, using SPSS. Maybe you have noticed, e.g. during your internships, that other statistical software programs are used as well. One of the most widely used statistical software is R. It is open source, free to use, and supported by many active users. But … it is based on writing code, and that needs some practice.\nWe expect that you understand why you need to use statistics in applied research, and are familiar with t-tests, linear regressions and anova’s (including post-hoc tests)."
+  },
+  {
+    "objectID": "index.html#setup",
+    "href": "index.html#setup",
+    "title": "Introduction to R for students specialisations",
+    "section": "Setup",
+    "text": "Setup\nThis manual is setup for self study, but we have supporting lessons with a short introduction of the week’s content and time for questions."
+  },
+  {
+    "objectID": "W01.html",
+    "href": "W01.html",
+    "title": "1  Start with RStudio",
+    "section": "",
+    "text": "RStudio is free software and available for Windows, macOS and Linux.\nR is a computer language, developed in New Zealand, in 1995, maintained by the R Core Team. In make life easier an an Integrated Development Environment (IDE) is developed: RStudio. With the combination of R and RStudio you can easily handle data, make analyses and create figures."
+  },
+  {
+    "objectID": "W01.html#installing",
+    "href": "W01.html#installing",
+    "title": "1  Start with RStudio",
+    "section": "1.1 Installing",
+    "text": "1.1 Installing\nYou need to install both R and RStudio. You can find the links here vinden.\n\nExercise 1.1 Install the software\n\nClick on the link above\nFollow the first step to install R. Click on install for the first time. Always choose yes and OK.\nGo back to the first website and follow step 2. Choose the most recent free stand alone version of RStudio.\nOpen RStudio"
+  },
+  {
+    "objectID": "W01.html#console",
+    "href": "W01.html#console",
+    "title": "1  Start with RStudio",
+    "section": "1.2 Console",
+    "text": "1.2 Console\nWhen you have opened RStudio, you see at the left bottom the console. This is the place where you give the computer R commands. The term originates from the time that computers were the size of a (modern) fridge, and giving commands via a separate keyboard and screen (often incorporated in a desk): the console. Nowadays everything is integrated in a laptop, and the commands are often hidden behind icons.\nAt the bottem you see >. That is the prompt, right after you can type commands.\nMost of you are not familiar with communicating with computers via language, so it is important to practice it a bit.\n\nExercise 1.2 Calculation excercise\n\nGive R some calculation commands, e.g. 4*2. Don’t put a = for or after the command. End your command with enter.\ntry also square roots (sqrt()), the power (3^2), pi (pi)."
+  },
+  {
+    "objectID": "W01.html#objects",
+    "href": "W01.html#objects",
+    "title": "1  Start with RStudio",
+    "section": "1.3 Objects",
+    "text": "1.3 Objects\nOften you want to use the outcome of a calculation in the next step. You can put the outcome in the computer memory by giving it a name:\n\noutcome <- 4*2\n\nof\n\n4*2 -> outcome\n\nThe arrow (<-) means that the name (the object) where it points to, get the value which is at the other end of the arrow.\nMost often the left pointing arrow is used (<-), which you can write instantly with surrounding spaces with the short-cut alt-. Objects always need to start with a letter and should not contain any spaces.\nBy just writing the object name in the console you can call the value of that object. And good to know that R distuinguished normal and capital letters.\n\n\n\n\n\n\nTip\n\n\n\nuse object names that make sense, you will recognize the purpose the day after.\n\n\n\nExercise 1.3 Objects\n\nmake objects for your name, place of residence, age and favorite number. NB:you need to start and end a text string with \" to make clear it is a valua and not an object name. For numbers, don’t use \"!\ncall one-by-one the different objects\nlet R sum up your age and favorite number (Nb: use the object names!)\nTry also sum up name and place of residence. You will get an error. Read it carefully and try to understand the meaning of the error"
+  },
+  {
+    "objectID": "W01.html#Vectors",
+    "href": "W01.html#Vectors",
+    "title": "1  Start with RStudio",
+    "section": "1.4 Vectors",
+    "text": "1.4 Vectors\nObjects can be combined in a vector, with the function c()(c stands for combine).\n\np1 <- c(naam, woonplaats, leeftijd)\n\nThe vector is an object on its own, containing multiple values from the other objects. In this case we have named this vector p1, but you can choose a different name if you like. Vectors are widely used in R, especially in statistical functions.\nYou can call the values seperately by using an index number after the object name: e.g. p1[2]. Within the square brackets [] you give the item number in the vector. The first item has index number 1.\nYou also can give multiple index numbers, using the function c(): e.g. p1[c(1,3)], or using the minus sign to exclude one or more: e.g. p1[-2].\n\nExercise 1.4 Index numbers\n\nmake a vectore with the range 1 to 10 (easily made in R with the code 1:10). Give it an object name.\nPractice with calling different numbers from the range using index numbers.\nCall the complete vector, except the last value.\nFind a clever way to call at once index numbers 3-7.\n\n\nIf vectors only contain numbers, you can make calculations with the complete vector.\n\nExercise 1.5 Vectors\n\nCreate a vector with the rang 1-4\nMultiple the vector by 2. What happens?\nTry also different calculations.\nWhat happens if you multiply the vector by itself?"
+  },
+  {
+    "objectID": "W01.html#functies",
+    "href": "W01.html#functies",
+    "title": "1  Start with RStudio",
+    "section": "1.5 Functies",
+    "text": "1.5 Functies\nFunctions are the foundation of R (and every other computer language). They are in essence small factories changing input to output. The output can be a number, but also a grpah or even the creation of a file.\nFor illustration purposes the function mean():\n\nmean(v)\n\nHiermee geef je R de opdracht het gemiddelde te berekenen van de getallen in vector v.\n\nExercise 1.6 Functions\n\ncalculate the mean of the vector from last excercise.\nApply also the next functions:\n\nlength()\nsd()\nmin()\nmax()\nrange()\nsummary()\n\nFind out what these functions do. Tip: you can use ?functionname to open a help page.\n\n\nThe input in a function is called an argument. Many functions can have multiple arguments. Some of them are required, otherwise you get an error. Other arguments are not required, and have standard values. You only need to add them, if you want to have another values for those arguments. In the next lesson, about t-tests, you will find both types of arguments.\nNB: all arguments have names. It is a good custom to name them in your functions (e.g. mean(x=p1)), otherwise R will assume the order of arguments based on how the function is programmed. You find the argument named with the helper pages using ?."
+  },
+  {
+    "objectID": "W01.html#packages",
+    "href": "W01.html#packages",
+    "title": "1  Start with RStudio",
+    "section": "1.6 Packages",
+    "text": "1.6 Packages\nR has a great number of base functions available, but people have developed many more functions. These functions are available in so called packages. Packages are bundles of functions, often developed for specific purposes (e.g. making nice graphs). These packages are tested and available from a save location (CRAN-website). You can install them with the function install.packages(). As argument you give the package name. NB: it is text, so you need \".\nYou only need to install it once on your computer. It is like buying a book (but then for free!) and store it in your bookshelf.\nFor this course we use many functions out of a collection of packages called tidyverser. We also use the package readxl to import Excel files.\n\nExercise 1.7 Install packages\n\nInstall the packages tidyverse and readxl. NB: installing tidyverse takes time, wait until you see the cursor again.\n\n\nPlacing a book in the bookshelf, does not mean you can read it. In order to use a function from a package you need to activate with the function library(). The reason is that some packages contain functions with the same name. It is saver to only activate packages you need."
+  },
+  {
+    "objectID": "W01.html#r-project",
+    "href": "W01.html#r-project",
+    "title": "1  Start with RStudio",
+    "section": "1.7 R-project",
+    "text": "1.7 R-project\nThe power of RStudio is the way you can organise data analysis in projects. By linking a project environment to a map on your computer, you can store the history of your data analysis for that specific map and RStudio use that map as the default to search and store files (replacing the old R-code setwd() to define the working directory). You can start a project in an existing folder, or make a new map (RStudio uses the old name directory for a map).\nFor this course, I already created a map in Teams which you need to synchronise with your computer in order to work with.\nYou can open the project from within RStudio: File -> Open project, or next time by double clicking on the R-project file in your map. Then it will automatically open RStudio in your project mode."
+  },
+  {
+    "objectID": "W01.html#script",
+    "href": "W01.html#script",
+    "title": "1  Start with RStudio",
+    "section": "1.8 Script",
+    "text": "1.8 Script\nNice that you can communicate with the computer via de console, but how do you remember what you did last week? The solution is to write your codes in a text document and execute the codes from there. Such a text document is called a script. If you save your script in your project map, you only need to open it to see what you did last time.\nYou can open a new script by either clicking on the plus sign in the menu, or use the short-cut ctr+shift+n.\n\nExercise 1.8 Setup script\n\ntype in the first row the next code library(readxl).\nin th next row type `temp <- read_excel(“data/lichaamstemperatuur.xlsx”)\nSave the script as Bodytemp.R in je R-folder.\n\n\nWith the short-cut Ctrl+Enter you can run the row where your cursor is. It automatically goes to the next row, so you can by repeatly using the short-cut run all codes in your script. You can also select all or part of the code and run it at once with the same short-cut.\n\nExercise 1.9 Run code\n\nexecute the codes from your script row by row\nObserve what it is doing\n\n\nTo make your codes more clear, you can add comments. Text starting with # will be recognized as comments, and not executed. It is a good habit to add comments in your scripts, so other people can understand what you were doing.\n\nExercise 1.10 Comments\n\nInclude above both rows of code in the scrip an extra row describing the code below as a comment"
+  },
+  {
+    "objectID": "W01.html#data-frame",
+    "href": "W01.html#data-frame",
+    "title": "1  Start with RStudio",
+    "section": "1.9 Data frame",
+    "text": "1.9 Data frame\nBy running both rows of code, if correct you see on the right top side the object bodytemp. The object is the data from the Excel file, and is called a data frame.\n\nExercise 1.11 Data frame\n\nadd the next code to your script: str(bodetemp), and run that code.\n\n\nStr stands for structure and with this function you can see the intern structure of the objec\nYou get the following output:\n\n\ntibble [130 × 3] (S3: tbl_df/tbl/data.frame)\n $ tc : num [1:130] 35.7 35.9 36.1 36.1 36.2 36.2 36.2 36.2 36.3 36.3 ...\n $ gen: chr [1:130] \"man\" \"man\" \"man\" \"man\" ...\n $ hr : num [1:130] 70 71 74 80 73 75 82 64 69 70 ...\n\n\nThe top row shows the type of object. In this case it has three labels: tbl_df, tbl en data.frame. Sounds complicated, but all three say that it is a ** data frame**.\nEvery column is in fact a vector. They are listed after the $. The type of data in each vector is given (num = numeric, chr = character (= text)). Between the brackets ([]) you can find how long the vectors are.\nThere are several ways to look at your data frame:\n\nVia the object name (bodytemp)\nWith the function View()\nIn the right top window, by clicking on the object name\n\n\nExercise 1.12 View your Data frame\n\nTry the three ways to view your data frame\n\n\nOften, you only need certain vectors (columns) from your data frame. You can call these vectors seperately by using the sign $ after the object name of the data frame. In case of the bodytemp data set: bodytemp$tc will show you the vector tc.\n\nExercise 1.13 call vector from data frame\n\nWrite a code that will calculate the average of the vector tc.\n\n\n\nExercise 1.14 Own data set\n\nUse, or make an Excel file of a own data set (e.g. from your internship)\nStart a new script and write code that will import that data\nView your data in RStudio"
+  },
+  {
+    "objectID": "W01.html#summary-part-1",
+    "href": "W01.html#summary-part-1",
+    "title": "1  Start with RStudio",
+    "section": "1.10 Summary part 1",
+    "text": "1.10 Summary part 1\nYou now have the basic skills of working in RStudio.\n\nYou can use R commands to make calculations\nYou can work with RSTudio projects and scripts\nYou know what data frames and vectors are, and make calculations with them\nYou can import data from Excel files\n\nIn the next chapter you use these skills to apply statistics."
+  },
+  {
+    "objectID": "W02.html",
+    "href": "W02.html",
+    "title": "2  Figures via ggplot",
+    "section": "",
+    "text": "The most common way to produce figures in R nowadays is using the package ggplot2. It is part of the Tidyverse packages. It is extremely versatile.\nIn this course we spend one lesson on ggplot to learn the basics. We use the online manual."
+  },
+  {
+    "objectID": "W02.html#first-steps",
+    "href": "W02.html#first-steps",
+    "title": "2  Figures via ggplot",
+    "section": "2.1 First steps",
+    "text": "2.1 First steps\nGGplot is part of tidyverse, which includes all kind of tools to work with data, with some of them quite usefully when making figures. Therefore it is, in general, useful to make this tools available in your script.\n\nExercise 2.2 Tidyverse\n\nAdd to your script a line of code that will activate tidyverse and run the code. NB: it is good custom to place all the library-function in the first rows of your script."
+  },
+  {
+    "objectID": "W02.html#code-for-figures",
+    "href": "W02.html#code-for-figures",
+    "title": "2  Figures via ggplot",
+    "section": "2.2 Code for figures",
+    "text": "2.2 Code for figures\nOn first sight, codes for ggplot-figures look unnecessarily complicated, but it is in fact quite structured.\nThe code works in a few steps:\n\nFirst step is to define the figure, by giving the variables for the x and y-axis.\n\nggplot(data = df, aes(x = var1, y = var2)) +\nNB: replace the names var1, var2 and df for the names you use for your data frame and column names.\nThe + is placed at the end of the row to indicate that the output of this row will be used in the next line of code. In this way, you can build-up the code for the figure in a clear and structured way.\n\nThe second step is defining the type of figure, e.g.:\n\ngeom_histogram()\nNB: for some figures you only need an x-variable, like for histogram or boxplot.\n::: {#exr-histogram}\nHistogram\n\nAdd code in your script to make a histogram of body temperature\n\n:::`"
+  },
+  {
+    "objectID": "W02.html#types-of-figures",
+    "href": "W02.html#types-of-figures",
+    "title": "2  Figures via ggplot",
+    "section": "2.3 Types of figures",
+    "text": "2.3 Types of figures\nWith ggplot there are many different types of figures possible. Have a look in the manual at the geoms chapter.\n\nExercise 2.3 geom-functions\n\nFind out which functions you need for a boxplot and for a scatterplot"
+  },
+  {
+    "objectID": "W02.html#aes",
+    "href": "W02.html#aes",
+    "title": "2  Figures via ggplot",
+    "section": "2.4 aes",
+    "text": "2.4 aes\nThe functions ggplot()has aes as argument (input for the function). Aes stand for aesthetics. No idea why this word is chosen, since the argument is about which data is presented on which axis. You probably noticed that aes is followed by (), which indicates that aes is a function on its own.\nIn aes() you can add additional arguments, e.g. to color or fill different groups (using fill=vargroup or color=vargroup, vargroup the name of column that defines the group).\n\nExercise 2.4 aes\n\nadjust your script in a way that the different genders (column gen) have a different fill."
+  },
+  {
+    "objectID": "W02.html#position",
+    "href": "W02.html#position",
+    "title": "2  Figures via ggplot",
+    "section": "2.5 position",
+    "text": "2.5 position\nAs you probably noticed, is the result of a histogram with two groups that both histograms are stacked. But it would give more insight if they are placed on the same level.\nYou can change that with the argument position in the geom-function: position =  \"identity\".\nThe value identity means that both groups are positioned independently of each other on the y-axis. For other possibilities see manual.\n\nExercise 2.5 position\n\nAdjust the code, so that both histograms are not stacked anymore."
+  },
+  {
+    "objectID": "W02.html#transparancy",
+    "href": "W02.html#transparancy",
+    "title": "2  Figures via ggplot",
+    "section": "2.6 transparancy",
+    "text": "2.6 transparancy\nNow both histograms are at the same height can we compare the numbers more easily. Drawback is that in some places one group is hidden behind the other and you don’t see how much lower the other group is. The solution is to make the bars slightly transparant. You can do that with the argument (also in the geom-function) alpha = 0.4. The value 0.4 is oftern a good mix between brightness and transparency.\n\nExercise 2.6 alpha\n\nAdd the argument alpha to your code and adjust the value to your preference."
+  },
+  {
+    "objectID": "W02.html#densityplots",
+    "href": "W02.html#densityplots",
+    "title": "2  Figures via ggplot",
+    "section": "2.7 Densityplots",
+    "text": "2.7 Densityplots\nA nice alternative for an histogram is a densityplot, via the function geom_density.\n\nExercise 2.7 density\n\nCopy the code for the histogram in your script.\nReplace the word histogram with density and run the code.\n\n\nQuite simple, isn’t it?"
+  },
+  {
+    "objectID": "W02.html#scatter-plots",
+    "href": "W02.html#scatter-plots",
+    "title": "2  Figures via ggplot",
+    "section": "2.8 Scatter plots",
+    "text": "2.8 Scatter plots\nA common graph is the scatter plot. Both x- and y-axis contain numerical (and often continuous) data.\nIn the aes() you need column names for both x and y. With geom_point you display the data as points in the graph. As in the histogram, you can give groups different colours, in the case of points, choose the argument color instead of fill in aes().\n\nExercise 2.8 Scatterplot\n\nAdd in your script code for a scatterplot of tc on the x-axis verus hr (heart rate)\nGive the different genders a different colour."
+  },
+  {
+    "objectID": "W02.html#bar-chart",
+    "href": "W02.html#bar-chart",
+    "title": "2  Figures via ggplot",
+    "section": "2.9 Bar chart",
+    "text": "2.9 Bar chart\nA common way to present data like in the body temperature data set, is to use bar charts.\nBar charts give the average (and ofter spread in the form of error bars) of the data, which is nearly always divided in different groups (one bar for each group).\nThe most convinient ggplot-code for this kind of plots is stat-summary(). In the function you can define the type of graph. For a bar chart, use geom = \"bar\". It automatically calculates the mean and the standard error for each group.\n\nExercise 2.9 Bar chart\n\nmake in the same script new code to show the means of body temperature of men and women in separate bars. Tip: use gen as variable on the x-axis\nrun the code\n\n\nOften you want to include error bars in your bar chart. With the ggplot it is quite easy: just add another layer with stat_summary(), but now with geom = \"errorbar\". For aesthetic reasons make the error bar smaller than the bar by adding the argument width = 0.5.\n\nExercise 2.10 Error bar\n\nAdd an error bar to your plot"
+  },
+  {
+    "objectID": "W02.html#multiple-groups-with-bar-plots",
+    "href": "W02.html#multiple-groups-with-bar-plots",
+    "title": "2  Figures via ggplot",
+    "section": "2.10 multiple groups with bar plots",
+    "text": "2.10 multiple groups with bar plots\nAlso by bar charts you can show different groups. In this case use the argument fill as you want to fill up the bars.\nThe default setting for position in stat_summary() is “identity:, but with bar charts it is normal to have the groups besides each other, that is called dodge. You can control how close the groups are by: position = position_dodge(0.9). A value of 0.9 is often optimal.\nNB: position_dodge() also works with other types of graphs like box plots and violin plots."
+  },
+  {
+    "objectID": "W02.html#trend-line",
+    "href": "W02.html#trend-line",
+    "title": "2  Figures via ggplot",
+    "section": "2.11 Trend line",
+    "text": "2.11 Trend line\nWhen you have a scatter plot, you are often interested in the relation between the variables on the x- and y-axis.\nYou probably know the function for a trend line in Excel, a similar function is available in ggplot. Just ad the line geom_smooth(method = \"lm\"). The argument lm means that a linear fit is made.\n\nExercise 2.11 trend line\n\nGo back to the script for the scatter plot\nAdd a trend line\n\n\nIf done right, you see now a straight line through the point cloud. Around the line is a grey area: the 95% condifence of the line (with 95% confidence the real linear relation is with that area). If you want to remove that area, just add the argument se = FALSE."
+  },
+  {
+    "objectID": "W02.html#many-more-possibilities",
+    "href": "W02.html#many-more-possibilities",
+    "title": "2  Figures via ggplot",
+    "section": "2.12 Many more possibilities",
+    "text": "2.12 Many more possibilities\nThere is a variety of possibilies to adjust your figures in ggplot. In addition other people have developed packages that make other figures (including GIS-maps) with ggplot-functionality.\nBecause a clear figure is an excellent way to communicate research results, it is clever to invest some time learning more about ggplot."
+  },
+  {
+    "objectID": "W03.html",
+    "href": "W03.html",
+    "title": "3  T-tests",
+    "section": "",
+    "text": "There are three types of t-tests:\nAll three tests can be applied with one function t.test(), thanks to the possibility of multiple arguments in one function.\nIn the next section we need the data set bodytemp, which you already imported."
+  },
+  {
+    "objectID": "W03.html#one-sample-t-test",
+    "href": "W03.html#one-sample-t-test",
+    "title": "3  T-tests",
+    "section": "3.1 One-sample t-test",
+    "text": "3.1 One-sample t-test\nThe simplest version of a t-test is when you want to test if the average of a single population is different from a theoretical value. So, you collect a random sample from a population, e.g. the body temperature of 130 students.\nThe next step is to define your hypotheses:\n\nH0: Temperature is not different from 37 degrees Celsius. H1: Temperature is different from 37 degrees Celsius.\n\nThe general idea is that human’s body temperature is on average 37 degrees Celsius, hence this H0. The symbol for the population average is \\(\\mu\\), pronounced as mu.\nThird step is testing the hypothesis with the function t.test(x, mu = ..).\nFor a one-sample t-test (as we need now), the first argument should be a vector, containing the sample to be tested. The other argument needed is mu, which is \\(\\mu\\) from the H0. NB: mu is not second in row in the list of possible arguments, therefore you need to name it in your code followed by = and the value.\nThe output gives a lot of information. Most important, for hypothesis testing, is the p-value. P-values less than the threshold \\(\\alpha\\) (often 0.05) means that you reject the H0 and accept the H1. But also usefull is the 95% confidence interval. It shows the lower and upper limit where, with 95% confidence, of the real average.\n\nExercise 3.1 Vectors and data frames\n\nrefresh your memory about vectors and data frames. How can you call a vector from a data frame?\n\n\n\nExercise 3.2 One sample t-test\n\nTest with a one-sample t-test if the average body temperature deviates from 37 degrees celsius (add the code to your script.\nWrite down your conclusions as a comment in the script.\n\n\n\n3.1.1 One sided and two sided tests\nWith a t-test you can test one and two sided. The default setting in the function t.test() is two sided. But there are situations you want to test if the average value is lower than a certain value. Your H1 is then: \\(\\mu\\) < 37. By giving the argument alternative the value less, you test one sided. In the situation you want to test \\(\\mu\\) > 37, you need to use the value greater.\n\nExercise 3.3 Testing one sided\n\ncopy your t.test code to a new row and adjust it so it will test if \\(\\mu\\) < 37.\nCompare the outcome\n\n\n\n\n3.1.2 Climate change\nIn the last years the role of humans in climate change is becoming more clear. That is ilustrated in below figure, showing the week average in the Bilt in the period before 1950 and from 2000 (data: KNMI).\n\n\n\n\n\n\n\n\nNow it is your turn to test, for a specific week if the temperatures, from 2000 onward, are on average higher than before 1950. You all have a data set in your project map for a specific week number. Check the average pre 1950 temperature for the same week number in the table below.\n\nExercise 3.4 Climate change\n\nOpen a new script, save it under a logical name\nWrite down the H0 and the H1 as comments in the script\nwrite down codes for importing the data set and the one sample t-test.\nWrite down your conclusions as comment in the script.\n\n\nAverage temperature per week in period 1901-1950:\n\n\n\n\n \n  \n    weeknumber \n    pre1950 \n  \n \n\n  \n    1 \n    2.83 \n  \n  \n    2 \n    2.27 \n  \n  \n    3 \n    1.95 \n  \n  \n    4 \n    1.20 \n  \n  \n    5 \n    2.13 \n  \n  \n    6 \n    2.16 \n  \n  \n    7 \n    2.36 \n  \n  \n    8 \n    2.82 \n  \n  \n    9 \n    3.47 \n  \n  \n    10 \n    3.71 \n  \n  \n    11 \n    4.57 \n  \n  \n    12 \n    5.90 \n  \n  \n    13 \n    6.59 \n  \n  \n    14 \n    7.02 \n  \n  \n    15 \n    8.06 \n  \n  \n    16 \n    8.37 \n  \n  \n    17 \n    8.95 \n  \n  \n    18 \n    10.35 \n  \n  \n    19 \n    11.18 \n  \n  \n    20 \n    12.10 \n  \n  \n    21 \n    13.63 \n  \n  \n    22 \n    14.14 \n  \n  \n    23 \n    14.48 \n  \n  \n    24 \n    14.36 \n  \n  \n    25 \n    15.07 \n  \n  \n    26 \n    15.19 \n  \n  \n    27 \n    15.99 \n  \n  \n    28 \n    16.69 \n  \n  \n    29 \n    16.58 \n  \n  \n    30 \n    16.48 \n  \n  \n    31 \n    16.48 \n  \n  \n    32 \n    16.35 \n  \n  \n    33 \n    15.98 \n  \n  \n    34 \n    15.68 \n  \n  \n    35 \n    15.48 \n  \n  \n    36 \n    14.83 \n  \n  \n    37 \n    13.82 \n  \n  \n    38 \n    13.23 \n  \n  \n    39 \n    12.28 \n  \n  \n    40 \n    11.24 \n  \n  \n    41 \n    10.44 \n  \n  \n    42 \n    9.55 \n  \n  \n    43 \n    8.02 \n  \n  \n    44 \n    7.16 \n  \n  \n    45 \n    6.19 \n  \n  \n    46 \n    5.00 \n  \n  \n    47 \n    4.39 \n  \n  \n    48 \n    4.15 \n  \n  \n    49 \n    3.44 \n  \n  \n    50 \n    2.98 \n  \n  \n    51 \n    2.18 \n  \n  \n    52 \n    2.46 \n  \n  \n    53 \n    2.29"
+  },
+  {
+    "objectID": "W03.html#independent-t-test",
+    "href": "W03.html#independent-t-test",
+    "title": "3  T-tests",
+    "section": "3.2 Independent t-test",
+    "text": "3.2 Independent t-test\nUp to now we have tested one group against a theoretic average. But often you want to compare two groups. In that case you have an independent (or explanatory) variable, which states to what group the observation belongs.\nIn the function t.test() you can use as first argument a statistical formula instead of a single vector. Such a formula always has the form dependent ~ independent.\nThe dependent (or response) variable is the variable you are interested in and which variation you want to explain.\nIn the data set bodytemp we have the column gen giving the gender of the students.\n\nExercise 3.5 Independent t-test\n\nTest if the average body temperature of male and female students significant differ. Add the code to the bodytemp script\nWrite down the conclusions as comments in your script\n\n\n\n3.2.1 Fertilization\nIn your data map you find a Excel file called bemesting.xlsx. It contains data of an experiments where plant length is measured on plants that were or were not fertilized.\n\nExercise 3.6 Fertilization\n\nMake a new script, give it a logical name\nWrite code that import the bemesting.xlsx file\nTest if fertilization has an effect on plant length. NB: consider if it makes sense to test one-sided\nWrite down the conclusions as a comment in the script"
+  },
+  {
+    "objectID": "W03.html#paired-t-test",
+    "href": "W03.html#paired-t-test",
+    "title": "3  T-tests",
+    "section": "3.3 Paired t-test",
+    "text": "3.3 Paired t-test\nWith the independent t-test, you have two groups that are sampled independently from each other, where both groups have a different treatment. But there are situations that you apply two treatments on the same research objects.\nFor example, students do a math test before and after drinking a few glasses of beer. Of course you expect that the math capacity will decrease after drinking beer. The hypotheses are:\n\nH0: Score before drinking is equal to score after drinking beer.\n\n\nH1: Score before drinking is higher then score after drinking beer.\n\nUnder the H0 you expect that the scores are on average equal before and after drinking. With other words: the difference between before and after is on average 0.\nHow can you test that with a t-test?\n\nCalculate for each student the difference of both tests\nApply a one-sample t-test for the difference with \\(\\mu\\)=0\n\nBut you can apply both steps at once with a paired t-test, so you don’t need to first calculate the difference.\nWith paired data it is important that it is clear which observations are paired. A good habit is to store paired data on the same row in your Excel spreadsheet:\n\n\n\n\nBeer experiment\n \n  \n    student \n    before \n    after \n  \n \n\n  \n    1 \n    7 \n    5 \n  \n  \n    2 \n    4 \n    4 \n  \n  \n    3 \n    6 \n    5 \n  \n  \n    4 \n    9 \n    7 \n  \n  \n    5 \n    5 \n    5 \n  \n\n\n\n\n\nThis setup is called a wide table. The consequence is that the response variable is not in one column, and therefor you cannot use the standard notation of a statistical formula.\nLuckily the function t.test() also can handle the input of two vectors: t.test(x,y). To make clear to R that we want to apply a paired t-test, we need to set the argument paired to TRUE: t.test(x,y, paired = TRUE). NB: TRUE needs to be written in capital letters. For lacy people: you also just use the capital letter T.\n\n\n\n\nExercise 3.7 beer\n\nmake a new script, and write a code to import bier.xlsx (from your data map)\nimport the data, and test if there is an negative effect of beer on the math score (write down your code in the script).\nWrite down your conclusions as a comment in the script.\n\n\n\n3.3.1 Macho blackbirds\nResearch has indicated that higher testosterone levels have a negative effect on resistance against diseases. This hypothesis is tested in red-winged blackbirds. In thirteen male birds antibody levels were measured before and after placing a testosterone producing implant. You find the data in blackbirds.xlsx in your data map.\n\nExercise 3.8 Macho blackbirds\n\nTest if the implant has a positive effect on antibody production\nWrite down your conclusions in the script"
+  },
+  {
+    "objectID": "W04.html",
+    "href": "W04.html",
+    "title": "4  Lineair models 1: Linear Regressie",
+    "section": "",
+    "text": "R has a function to fit the best linear model in a dataset. Most statistical tests (linear regression, one-way ANOVA, two-way ANOVA) are based on this linear model. The most intuitive linear model is a straight line through a cloud of data points. That is what you are doing with a linear regression.\nThe function to fit the linear model is lm(). Like the t.test it’s first argument is statistical formula: response ~ explanatory. In all cases the response vector needs to be numerical vector, otherwise you will get an error. In the case of a linear regression, the explanatory vector also needs to be an numerical vector.\nIn you data map you’ll find a file called ijklijn.xlsx. It is (not the best) calibration line for a colorimetric measurements: starch concentration:\nTo avoid complications with further functions (like predict()), we use an extra argument data to refer to the data frame object and we only use the column names (without object$) in the statistical model.\nDid you find the R2? For more details about the output of the summary() function: see here"
+  },
+  {
+    "objectID": "W04.html#hypothesis-testing",
+    "href": "W04.html#hypothesis-testing",
+    "title": "4  Lineair models 1: Linear Regressie",
+    "section": "4.1 Hypothesis testing",
+    "text": "4.1 Hypothesis testing\nAlthough it is not quite common to use regression analysis to test a hypothesis in this case: is there a relation between absorption and concentration), it is possible.\nWith the function anova() you apply an analysis of variance. In short, it will test if the explanatory power of the variation in your data set by the statistical model is so good, that you can rule out the possibility that this is due to random effects.\nThe function anova() needs as argument the output of the function lm() (that’s why you needed to store the output van lm as an object).\nThe function anova() creates an ANOVA table with for the explanory variable the p-value (here called Pr(>F)).\n\nExercise 4.2 Hypothesis testing\n\nApply the function anova() on the linear model of ijklijn\nIs there a significant relation between both vectors?"
+  },
+  {
+    "objectID": "W04.html#predictions",
+    "href": "W04.html#predictions",
+    "title": "4  Lineair models 1: Linear Regressie",
+    "section": "4.2 Predictions",
+    "text": "4.2 Predictions\nThe most common use of regressions is to make predictions. In the case of a calibration line, you want to use it to estimate the concentration in unknown samples based on the absorption.\nYou probably have done such measurements in the past by first estimate the regression line and use the parameters of that line to calculate the estimated concentrations.\nLuckily in R there is the function predict(). The negative side is that the function is a bit picky about the arguments. The first argument should be the output of the lm-function. So far so good. The next argument is the value(s) of the explanatory variable you want to make predictions for. Unluckily this argument should be in the format of a data frame ánd the column name should be exactly the same as in the statistical model.\nIt is quite easy to make a data frame: df <- data.frame(absorptie = 1.5)\nOf course you can use a different object name than df. Instead of one number you can make a longer vector, e.g. c(1.5, 2.3, 5.4).\nAn interesting option is to calculate the confidence interval. Just add the argument interval = \"confidence\")."
+  },
+  {
+    "objectID": "W04.html#practice",
+    "href": "W04.html#practice",
+    "title": "4  Lineair models 1: Linear Regressie",
+    "section": "4.3 practice",
+    "text": "4.3 practice\nIn an experiment we want to test the assumption that the weight gain of sow’s are and indication of the birth weight van piglets. For 10 sow’s data is collected. You can find the data in zeugen.xlsx in your data map.\n\nExercise 4.3 Piglets\n\nApply a linear regression.\nCheck what the p-value and the R2 are.\nPredict the expected piglet weight, and confidence interval, in the situation a sow will gain 15 kg"
+  },
+  {
+    "objectID": "W05.html",
+    "href": "W05.html",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "",
+    "text": "If the explanatory variable is categorical data, you can still fit a linear model. In that case you are fitting average values for each group. It’s called a One-way ANOVA. In contrast to an independent t-test, you can compare more than two groups.\nThe hypothesis you test with an ANOVA is if there are any differences between the groups. If you are interested in which group differ from each other, you have to apply an extra test, called a posthoc test."
+  },
+  {
+    "objectID": "W05.html#anova-in-r",
+    "href": "W05.html#anova-in-r",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "5.1 ANOVA in R",
+    "text": "5.1 ANOVA in R\nLike linear regression, you use the lm() function to fit a the statistical model, and the function anova() to test the hypothesis. NB: make sure that R interprets the explanatory variable as categorical. The easiest is that you use letters in the group category names.\nIn your data map you find the file koeien.xlsx. It is about milking speed (in kg/min) for three different cattle breeds.\n\nExercise 5.1 Milk production\n\nWrite a script that imports the data set\nAdd code that a) fit the linear model and b) run an ANOVA\nCheck the output and write down, as comment, your conclusions"
+  },
+  {
+    "objectID": "W05.html#posthoc-tests",
+    "href": "W05.html#posthoc-tests",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "5.2 Posthoc tests",
+    "text": "5.2 Posthoc tests\nIf you find a significant difference between the groups, you can test which groups are different with a posthoc test.\nOver time, many different posthoc tests have been developed, with sometimes subtle differences in assumptions and optimal use. To keep life simple, we stick with three posthoc tests for three different situations:\n\nIf groups sizes are similar, choose Tukey HSD\nIf group sizes are not similar, choose Bonferroni\nIf you only want to compare the groups with a control group (instead of all possible pairwise comparisons), choose Dunnet’s\n\nLike the enormous variety of posthoc test, are there also many ways to apply a posthoc test in R. The package emmeans has the function emmeans() that works for almost all possible statistical situations, therefor it is high recommendend to use this function.\nThe function emmeans() requires as first argument the output of a statistical model (in our case the output of lm()). Both Tukey HSD and Bonferroni make a pairwise comparison for each combination of groups. In the function emmeans() you can define that with the argument specs = pairwise  ~ explvar, where explvar is the name of the explanatory variable you want to test. The default posthoc test is Tukey HSD. If you want a Bonferroni instead, add the argument adjust = “bonf”.\n\nExercise 5.2 Posthoc test\n\nTest, with the right test, which cattle breeds differ in milking speed.\nLook at the output, and make your conclusions. Write them down as comment in your script.\n\n\nThe result of emmeans() is build up in two sections:\n\nThe first section (emmeans) show the average effect of each category, with confidence interval. For applied science is maybe more important than the question which groups are significant different! The name for these average effects are the Estimated Marginal Means.\nThe second section (contrasts) show the hypothesis test of each pairwise comparison, the actual posthoc test. Look at the p-value in the last column.\n\n\n5.2.1 Dunnet’s\nFor Dunnet’s Posthoc test you need to use for spects not pairwise, but trt.vs.ctrl (treatment versus control): specs = trt.vs.ctrl ~ explvar\nThe function automatically takes the first category (lowest in alphabet) as control. With the argument ref=i you can define which category is the control, with for i the index number of the control category (place all categories in alphabetic orde, a use the position of the control.\nIn case the control is the last in the row, you can also use: specs = tr.vs.ctrlk ~ explvar."
+  },
+  {
+    "objectID": "W05.html#practice",
+    "href": "W05.html#practice",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "5.3 Practice",
+    "text": "5.3 Practice\nThe next excercise is based on research, published in the American Society of Animal Science.\nThe spore element silicium (Si) has a positive influence on the bone quality. In the reserarch they were focused on the question if Si supplements in lactating mares influences the blood si levels in the foals. They tested three doses (A, B and C), with 5 replicates, in total 15 mares:\n\n\n\ndosis\nSi-gehalte (\\(\\mu\\)g/l)\n\n\n\n\nA\n129; 137; 129; 134; 139\n\n\nB\n133; 148; 142; 139; 134\n\n\nC\n138; 148; 140; 145; 148\n\n\n\n\nExercise 5.3 Silicium\n\nMake an Excel file wit the data\nMake an R script that imports the data, create an appropriate graph, apply an One-way ANOVA and in applicable the right Posthoc test.\nwrite down you conclusions as comment in the script."
+  },
+  {
+    "objectID": "W05.html#two-way-anovas",
+    "href": "W05.html#two-way-anovas",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "5.4 Two-way ANOVA’s",
+    "text": "5.4 Two-way ANOVA’s\nUp to now we have only focussed on one explanatory variable. But often your experiment is more complex. E.g. you are testing the growth effect of a new fertilizer on tomato’s, and are you testing it on three different tomato varieties. Now you have two factors that could influence the growth of the plants: fertilizer and variety.\nLuckily we can add both them easily in a linear model: growth ~ fertilizer + variety.\n\nExercise 5.4 Two-way anova\n\nWrite code that import the dataset plantengroei.xlsx from your data map.\nMake an approriate graph.\nTest if fertilizer and/or plant variaty has an effect on growth rate.\nWrite down your conclusions as a comment."
+  },
+  {
+    "objectID": "W05.html#main-and-interaction-effects",
+    "href": "W05.html#main-and-interaction-effects",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "5.5 Main and interaction effects",
+    "text": "5.5 Main and interaction effects\nIn the previous example we have used a + to add an extra explanatory effects. That plus means that the next variable has an effect, independend from the previous one. In this case you are testing the main effects of each variable. If you also want to include possible interaction effects you need to use a *."
+  },
+  {
+    "objectID": "W05.html#posthoc-tests-for-two-way-anovas",
+    "href": "W05.html#posthoc-tests-for-two-way-anovas",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "5.6 Posthoc tests for two-way ANOVAs",
+    "text": "5.6 Posthoc tests for two-way ANOVAs\nThe function emmeans() can be used for two-way ANOVAs as well. You can either test for one of the explanatory variables or all combinations of both. In that case you write specs = pairwise ~ var1:var2, with for var1 and var2 both explanatory variables."
+  },
+  {
+    "objectID": "W05.html#practice-1",
+    "href": "W05.html#practice-1",
+    "title": "5  Linear models 2: ANOVA’s and Posthoc Tests",
+    "section": "5.7 Practice",
+    "text": "5.7 Practice\nR contains data sets to practice. One of them is about the effect of vitamin C on tooth growth in Cavia porcellus. With the function data(\"ToothGrowth) you create an object of that dataset.\nThe vitamin was applied in three doses (0.5, 1 and 2 mg/day) (dose) in two different types of supplement (orange juice or vitamin C extrat) (supp). The length of the odontoplasts (growth cells in the teeth) were measured.\n\nExercise 5.5 Tooth growth\n\nmake an object of the data set ToothGrowth\ncheck the structure of the data set\n\n\nAs you can see, the column dose has numerical values. If you are going to put that column as explanatory variable in an lm() function, the function will treat it as covariate (meaning as a linear regression). The solution is to make R clear that it is a categorical data. The function for that is factor():\n\nToothGrowth$dose <- factor(ToothGrowth$dose)\n\n\nExercise 5.6 Tooth growth, part 2\n\napply above function\nmake an clear figure with ggplot\nTest both for dose and supp, including interaction for significant effects\napply an appropriate posthoc test)\n\n\n\n\n\n\n\n\nTip\n\n\n\nwith the table(TootGrowth$dose, TootGrowth$supp)you can get an overview of the number of replicates.\n\n\nYou’ll find in your data map the file bemestingxx.xlsx (x replaced by a number). It is about an fertilization experiment with two factors:\n\nfertilized/not fertilized\nExtra nutrient added/not added (either K/Mg or Ca)\n\n\nExercise 5.7 Fertilization2\n\nimports the data set\nmakes a clear figure\nWrite down the hypotheses (only main effects, no interactions)\napply a two-way ANOVA"
+  },
+  {
+    "objectID": "W06.html",
+    "href": "W06.html",
+    "title": "6  Logistic regression",
+    "section": "",
+    "text": "Up to now you have practiced with hypothese test for numerical continuous data, but in some cases the data behaves differentially. A common type of data is binomial: categorical data with only two outcomes.\nFor example, a tomato grower is experimenting with the best time to harvest his tomatos:\nAll harvested tomatoes are labelled ripe or not ripe:\nZulke data kan je mooi presenteren in een mozaiekplot (In het Engels mosaic plot geheten): This kind of data can be clearly presented in a mosaic plot (see script for inspiration):\nA nice feature of a mosaic plot is that you can read on both x- and y-axis which fraction is found in each category."
+  },
+  {
+    "objectID": "W06.html#binomial-alternative-for-anovas-and-linear-regressions",
+    "href": "W06.html#binomial-alternative-for-anovas-and-linear-regressions",
+    "title": "6  Logistic regression",
+    "section": "6.1 binomial alternative for ANOVA’s and linear regressions",
+    "text": "6.1 binomial alternative for ANOVA’s and linear regressions\nThe normal linear model cannot handle a binomial respons veriable. For that you need to use a generalized linear model. The function in R is glm(). You can add your statistical model in the same way as in the function lm(), but you have to add an extra argument to make clear that your respons is binomial: family = binomial().\n\n\n\n\n\n\nWarning\n\n\n\nThe response variable needs to be either a numerical variable with two values, or a factor (use factor())\n\n\n\nH0: all harvest times have the same probability for ripe tomatoes\n\n\nH1: at least some harvest times differ in probability for ripe tomatoes\n\n\nfit <- glm(factor(rijp)~factor(tijd), family = binomial(), data = tomaat)\n\nNB: the function factor() is used for the explanatory variable to make clear to R that the numerica data needs to be treated as categorical data.\nThe normal anova() function cannot handle the output of glm(). The reason is that you cannot apply a normal analysis of variance on these type of models to calculate the p-values. Instead you need to use the Anova() function from the car package:\n\ncar::Anova(fit)\n\nAnalysis of Deviance Table (Type II tests)\n\nResponse: factor(rijp)\n             LR Chisq Df Pr(>Chisq)  \nfactor(tijd)   6.6179  2    0.03655 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\nWarning\n\n\n\nThe package car contains a number of functions with the same name as functions in tidyverse. Therefore it is not practical to activate all functions. Instead use the code car::Anova() to make R clear in which package the function can be found.\n\n\n\nExercise 6.2 car package\n\nInstall the car packages"
+  },
+  {
+    "objectID": "W06.html#posthoc-test",
+    "href": "W06.html#posthoc-test",
+    "title": "6  Logistic regression",
+    "section": "6.2 Posthoc test",
+    "text": "6.2 Posthoc test\nSimilar as in normal ANOVA’s you can apply a posthoc test with the function emmeans()\n\nlibrary(emmeans)\nemmeans(fit, specs = pairwise ~ tijd)\n\n$emmeans\n tijd emmean   SE  df asymp.LCL asymp.UCL\n  -10  -1.61 1.10 Inf    -3.756     0.538\n   -5   1.10 1.15 Inf    -1.165     3.362\n    0   1.61 1.10 Inf    -0.538     3.756\n\nResults are given on the logit (not the response) scale. \nConfidence level used: 0.95 \n\n$contrasts\n contrast             estimate   SE  df z.ratio p.value\n (tijd-10) - (tijd-5)   -2.708 1.59 Inf  -1.701  0.2046\n (tijd-10) - tijd0      -3.219 1.55 Inf  -2.078  0.0945\n (tijd-5) - tijd0       -0.511 1.59 Inf  -0.321  0.9448\n\nResults are given on the log odds ratio (not the response) scale. \nP value adjustment: tukey method for comparing a family of 3 estimates"
+  },
+  {
+    "objectID": "W06.html#practice",
+    "href": "W06.html#practice",
+    "title": "6  Logistic regression",
+    "section": "6.3 Practice",
+    "text": "6.3 Practice\nA third year student Applied Biology is doing her internship at a grower and needs to test five different insecticides. She designed the following experiment:\n\nA certain number of flies is exposed to one of the five insecticides\nafter one hour she counts the number of dead and still alive flies\n\nYou find the data set in your data map: insecticiden.xlsx\n\nExercise 6.3 Insecticides.\n\nimport the data set\nMake a nice graph\napply a logistic regression\nTest which insecticide kills significant more flies than the control"
+  },
+  {
+    "objectID": "W06.html#regression-with-binomial-data",
+    "href": "W06.html#regression-with-binomial-data",
+    "title": "6  Logistic regression",
+    "section": "6.4 Regression with binomial data",
+    "text": "6.4 Regression with binomial data\nWe can also present the data in a different way:\n\ntomaat %>% \n  ggplot(aes(tijd, rijp, color = rijp)) + \n  geom_count() +\n  scale_color_manual(values = c(\"green\", \"red\")) \n\n\n\n\nWith the function geom_count() completely overlapping points are represented with bigger dots. Alternative is geom_jitter() that randomly move the points a bit to reduce overlap.\nNow we have on the x-axis not categories, but a continuous scale.\nCan we do something with regression? The answer is yes!\nAs with lm() the function glm() can perform both ANOVAs and regressions. This time the regression is not linear, but logistic: a logistic regression.\n\nfit2 <- glm(factor(rijp) ~ tijd, family = binomial(), data = tomaat)\n\nThe only difference with the previous analysis is that now the variable tijd is NOT a factor.\n\ncar::Anova(fit2)\n\nAnalysis of Deviance Table (Type II tests)\n\nResponse: factor(rijp)\n     LR Chisq Df Pr(>Chisq)  \ntijd   5.9506  1    0.01471 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nFor the tomato grower it is important to know from what time at least 25% of the tomatoes is ripe.\nWe can visualise that by adding a trend line (this time method = glm) and a horizontal line through 0.25:\n\ntomaat %>% \n  mutate(rijp = recode(rijp, rijp=1, onrijp=0)) %>%\n  ggplot(aes(tijd, rijp)) + \n  geom_count() +\n  geom_smooth(method=glm, method.args = list(family = binomial())) +\n  ylab(\"Fractie rijp\") +\n  geom_hline(yintercept = 0.25, color = \"blue\", linetype = \"dashed\") +\n  theme(legend.position = \"none\") \n\n\n\n\nNow you see the typical S-shape of a logistic regression. From five days before the normal harvest data the fraction ripe tomatoes is above the threshold.\n\n\n\n\n\n\nWarning\n\n\n\nWithin ggplot the function glm() cannot handle a factor response, but only 0 and 1 values. With the recode you can change your text to other values.\n\n\n\nExercise 6.4 Guppies\nPitkow et al. (1960) studied the effect of exposure to low temperature on the survival of guppies. He exposed each time 40 guppies to water at 5°C, for 3, 8, 12 or 18 minutes.\n\nimport the data set (guppies.xlsx)\nmake a clear graph, add a trend line\napply a logistic regression\nwhat are your conclusions"
+  }
+]
